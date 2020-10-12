@@ -1,0 +1,32 @@
+{
+  "type": "app",
+  "name": "Log Manager",
+  "id": "xformation-logmanager-ui-plugin",
+  "info": {
+    "description": "Log Manager",
+    "author": {
+      "name": "Synectiks",
+      "url": "https://xformation.com"
+    },
+    "keywords": ["cms", "panel"],
+    "version": "1.0",
+    "updated": "2018-10-12",
+    "logos": {
+      "small": "img/alert_logo.svg",
+      "large": "img/alert_logo.svg"
+    }
+  },
+  "includes": [
+    {
+      "type": "page",
+      "name": "Dashboard",
+      "addToNav": false,
+      "defaultNav": false,
+      "component": "Dashboard"
+    }
+  ],
+  "dependencies": {
+    "grafanaVersion": "3.x 4.x 5.x",
+    "plugins": []
+  }
+}
