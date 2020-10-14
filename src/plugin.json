@@ -23,6 +23,13 @@
       "addToNav": false,
       "defaultNav": false,
       "component": "Dashboard"
+    },
+    {
+      "type": "page",
+      "name": "LogManagment",
+      "addToNav": false,
+      "defaultNav": false,
+      "component": "LogManagment"
     }
   ],
   "dependencies": {

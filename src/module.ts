@@ -1,6 +1,4 @@
-import {
-  Dashboard,
-} from "./ui";
+import { Dashboard, LogManagment } from "./ui";
 import { ConfigCtrl } from "./ConfigCtrl";
 
 // import { loadPluginCss } from '@grafana/runtime';
@@ -16,7 +14,4 @@ export function loadPluginCss() {
 
 loadPluginCss();
 
-export {
-  ConfigCtrl,
-  Dashboard,
-};
+export { ConfigCtrl, Dashboard, LogManagment };

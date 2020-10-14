@@ -6,9 +6,7 @@ import listIcon from '../../img/list.png';
 import sortIcon from '../../img/sort.png';
 import openFolderIcon from '../../img/open-folder.png';
 import { Collapse } from 'reactstrap';
-import { RestService } from '../_service/RestService';
 import { config } from '../../config';
-import { getTagColorsFromName } from '../_utilities';
 export class ManageDashboards extends React.Component<any, any> {
 
     constructor(props: any) {
@@ -18,47 +16,11 @@ export class ManageDashboards extends React.Component<any, any> {
         };
     }
 
-    componentDidMount() {
-        RestService.getDashboardList(config.DASHBOARD_LIST_API).then((response: any) => {
-            console.log(response);
-            const retData = this.manipulateData(response);
-            const folderArray = this.convertObjectToArray(retData);
-            this.setState({
-                folderArray
-            });
-        });
-    }
-
     convertObjectToArray(object:any){
         const keys = Object.keys(object);
         const retData = [];
         for(let i=0; i<keys.length; i++){
             retData.push(object[keys[i]]);
-        }
-        return retData;
-    }
-
-    manipulateData(result: any) {
-        const retData: any = {};
-        for (let i = 0; i < result.length; i++) {
-            const dash = result[i];
-            if (dash.type === 'dash-db') {
-                retData[dash.folderId] = retData[dash.folderId] || { subData: [], openSubFolder: false, checkValueStatus: false, id: dash.folderId };
-                retData[dash.folderId].title = dash.folderTitle;
-                const tags = dash.tags.map((tag: any) => {
-                    const color = getTagColorsFromName(tag);
-                    return {
-                        name: tag,
-                        color
-                    }
-                });
-                retData[dash.folderId].subData.push({
-                    ...dash,
-                    title: dash.title,
-                    checkValue: false,
-                    tags,
-                });
-            }
         }
         return retData;
     }
