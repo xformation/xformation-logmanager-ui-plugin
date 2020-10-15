@@ -15,8 +15,8 @@ export class Dashboard extends React.Component<any, any> {
                 route: `/`
             },
             {
-                label: "Monitor",
-                route: `/`
+                label: "Log Managment | Dashboard",
+                isCurrentPage: true
             }
         ];
         this.createStreamRef = React.createRef();
@@ -29,81 +29,158 @@ export class Dashboard extends React.Component<any, any> {
 
     render() {
         return (
-            <div className="">
-                <Breadcrumbs breadcrumbs={this.breadCrumbs} pageTitle="Log Managment" />
-                <div className="container">
-                    <div className="row">
-                        <button>Search</button>
-                        <button>Streams</button>
-                        <button>Alerts</button>
-                        <button>Dashboard</button>
-                        <button>Input</button>
-                        <button>Pipeline</button>
+            <div className="logmanager-dashboard-container">
+                <Breadcrumbs breadcrumbs={this.breadCrumbs} pageTitle="LOG MANAGMENT" />
+                <div className="logmanager-page-container">
+                    <div className="common-container">
+                        <button className="blue-button"><i className="fa fa-cog"></i>&nbsp;&nbsp; Search</button>
+                        <button className="blue-button"><i className="fa fa-cog"></i>&nbsp;&nbsp; Streams</button>
+                        <button className="blue-button"><i className="fa fa-cog"></i>&nbsp;&nbsp; Alerts</button>
+                        <button className="blue-button"><i className="fa fa-cog"></i>&nbsp;&nbsp; Dashboard</button>
+                        <button className="blue-button"><i className="fa fa-cog"></i>&nbsp;&nbsp; Input</button>
+                        <button className="blue-button"><i className="fa fa-cog"></i>&nbsp;&nbsp; Pipeline</button>
+                        <button className="white-button float-right back-btn"><i className="fa fa-arrow-circle-left"></i>&nbsp;&nbsp; Back</button>
                     </div>
-                    <div className="">
-                        <h3>STREAMS</h3>
-                        <span>You can route incoming messeges into streams by applying rules against them. Messages matching the rules of a stream are routed it. A message can also be routed into multiple streams</span>
+                    <div className="common-container">
+                        <div className="streams-text">
+                            <h3>STREAMS</h3>
+                            <p>You can route incoming messeges into streams by applying rules against them. Messages matching the rules of a stream are routed it. A message can also be routed into multiple streams</p>
+                        </div>
                     </div>
-                    <div className="">
-                        <div className="">
+                    <div className="common-container">
+                        <div className="d-inline-block form-group search-control">
                             <button>
                                 <i className="fa fa-search"></i>
                             </button>
                             <input type="text" className="input-group-text" />
                         </div>
-                        <div className="">
-                            <button>Filter</button>
-                            <button>Reset</button>
+                        <div className="d-inline-block">
+                            <button className="blue-button m-b-0">Filter</button>
+                            <button className="blue-button m-b-0">Reset</button>
+                        </div>
+                        <div className="float-right new-stream-btn">
+                            <button className="blue-button m-b-0 m-r-0">New Stream</button>
                         </div>
                     </div>
-                    <div className="TableContainer">
-                        <div className="row">
-                            <div className="col-lg-3 col-md-3 col-sm-6">
-                                <span>All Events</span>
-                                <span>Index set: Graylog Events</span>
-                            </div>
-                            <div className="col-lg-7 col-md-7 col-sm-6">
-                                <span>Stream containing all events created by synetics Log Managment 0 Messages/second. No configured rules.<a>Show Stream Rules</a></span>
-                                <button>Manage Rules</button>
-                                <button>Manage Output</button>
-                                <button>Manage Alerts</button>
-                            </div>
-                        </div>
-                        <div className="row">
-                            <div className="col-lg-3 col-md-3 col-sm-6">
-                                <span>All Messages</span>
-                                <span>Index set: Graylog Events</span>
-                            </div>
-                            <div className="col-lg-7 col-md-7 col-sm-6">
-                                <span>Stream containing all Messages 0 Messages/second. No configured rules.<a>Show Stream Rules</a></span>
-                                <button>Manage Rules</button>
-                                <button>Manage Output</button>
-                                <button>Manage Alerts</button>
-                            </div>
-
-                        </div>
-                        <div className="row">
-                            <div className="col-lg-3 col-md-3 col-sm-6">
-                                <span>All System Events</span>
-                                <span>Index set: Graylog Events</span>
-                            </div>
-                            <div className="col-lg-7 col-md-7 col-sm-6">
-                                <span>Stream containing all events created by synetics Log Managment 0 Messages/second. No configured rules.<a>Show Stream Rules</a></span>
-                                <button>Manage Rules</button>
-                                <button>Manage Output</button>
-                                <button>Manage Alerts</button>
-                            </div>
-                        </div>
-                        <div className="row">
-                            <div className="col-lg-3 col-md-3 col-sm-6">
-                                <span>All Events</span>
-                                <span>Index set: Graylog Events</span>
-                            </div>
-                            <div className="col-lg-7 col-md-7 col-sm-6">
-                                <span>Stream containing all events created by synetics Log Managment 0 Messages/second. No configured rules.<a>Show Stream Rules</a></span>
-                                <button>Manage Rules</button>
-                                <button>Manage Output</button>
-                                <button>Manage Alerts</button>
+                    <div className="common-container border-bottom-0">
+                        <div className="table-container">
+                            <div className="table-container-inner">
+                                <table className="table">
+                                <tbody>
+                                    <tr>
+                                        <td>
+                                            <h4>All Events</h4>
+                                            <span>Index set: Graylog Events</span>
+                                        </td>
+                                        <td>
+                                            <table className="inner-table">
+                                                <tr>
+                                                    <td>
+                                                        <p>Stream containing all events created by synetics Log Managment</p>
+                                                        <p>0 Messages/second. No configured rules.&nbsp;&nbsp; <a href="#">Show Stream Rules</a></p>
+                                                    </td>
+                                                    <td>
+                                                        <div className="d-inline-block">
+                                                            <button className="blue-button m-b-0">Manage Rules</button>
+                                                            <button className="blue-button m-b-0">Manage Output</button>
+                                                            <button className="blue-button m-b-0">Manage Alerts</button>
+                                                        </div>
+                                                        <div className="d-inline-block">
+                                                            <button className="btn btn-link"><i className="fa fa-edit"></i></button>
+                                                            <button className="btn btn-link"><i className="fa fa-trash"></i></button>
+                                                            <button className="btn btn-link"><i className="fa fa-ellipsis-h"></i></button>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                            </table>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <h4>All Messages</h4>
+                                            <span>Index set: Graylog Events</span>
+                                        </td>
+                                        <td>
+                                            <table className="inner-table">
+                                                <tr>
+                                                    <td>
+                                                        <p>Stream containing all Messages</p>
+                                                        <p>0 Messages/second. No configured rules.&nbsp;&nbsp; <a href="#">Show Stream Rules</a></p>
+                                                    </td>
+                                                    <td>
+                                                        <div className="d-inline-block">
+                                                            <button className="blue-button m-b-0">Manage Rules</button>
+                                                            <button className="blue-button m-b-0">Manage Output</button>
+                                                            <button className="blue-button m-b-0">Manage Alerts</button>
+                                                        </div>
+                                                        <div className="d-inline-block">
+                                                            <button className="btn btn-link"><i className="fa fa-edit"></i></button>
+                                                            <button className="btn btn-link"><i className="fa fa-trash"></i></button>
+                                                            <button className="btn btn-link"><i className="fa fa-ellipsis-h"></i></button>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                            </table>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <h4>All System Events</h4>
+                                            <span>Index set: Graylog Events</span>
+                                        </td>
+                                        <td>
+                                            <table className="inner-table">
+                                                <tr>
+                                                    <td>
+                                                        <p>Stream containing all events created by synetics Log Managment</p>
+                                                        <p>0 Messages/second. No configured rules.&nbsp;&nbsp; <a href="#">Show Stream Rules</a></p>
+                                                    </td>
+                                                    <td>
+                                                        <div className="d-inline-block">
+                                                            <button className="blue-button m-b-0">Manage Rules</button>
+                                                            <button className="blue-button m-b-0">Manage Output</button>
+                                                            <button className="blue-button m-b-0">Manage Alerts</button>
+                                                        </div>
+                                                        <div className="d-inline-block">
+                                                            <button className="btn btn-link"><i className="fa fa-edit"></i></button>
+                                                            <button className="btn btn-link"><i className="fa fa-trash"></i></button>
+                                                            <button className="btn btn-link"><i className="fa fa-ellipsis-h"></i></button>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                            </table>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <h4>All Events</h4>
+                                            <span>Index set: Graylog Events</span>
+                                        </td>
+                                        <td>
+                                            <table className="inner-table">
+                                                <tr>
+                                                    <td>
+                                                        <p>Stream containing all events created by synetics Log Managment</p>
+                                                        <p>0 Messages/second. No configured rules.&nbsp;&nbsp; <a href="#">Show Stream Rules</a></p>
+                                                    </td>
+                                                    <td>
+                                                        <div className="d-inline-block">
+                                                            <button className="blue-button m-b-0">Manage Rules</button>
+                                                            <button className="blue-button m-b-0">Manage Output</button>
+                                                            <button className="blue-button m-b-0">Manage Alerts</button>
+                                                        </div>
+                                                        <div className="d-inline-block">
+                                                            <button className="btn btn-link"><i className="fa fa-edit"></i></button>
+                                                            <button className="btn btn-link"><i className="fa fa-trash"></i></button>
+                                                            <button className="btn btn-link"><i className="fa fa-ellipsis-h"></i></button>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                            </table>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
                             </div>
                         </div>
                     </div>
