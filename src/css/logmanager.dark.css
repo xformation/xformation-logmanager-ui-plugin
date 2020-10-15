@@ -1,0 +1,44 @@
+.breadcrumbs-container {
+  background-color: #3b4859;
+  padding: 14px 20px 15px;
+  font-size: 13px;
+}
+.breadcrumbs-container .page-title {
+  color: #ffffff;
+  display: inline-block;
+}
+.breadcrumbs-container .breadcrumbs {
+  float: right;
+}
+.breadcrumbs-container a.breadcrumbs-link {
+  color: #fcfcfc;
+}
+.breadcrumbs-container .current-page {
+  color: #fcfcfc;
+}
+.breadcrumbs-container .separator {
+  color: #fcfcfc;
+  display: inline-block;
+  padding: 0 10px;
+}
+
+@media (max-width: 768px) {
+  .breadcrumbs-container .breadcrumbs {
+    float: none;
+    padding-top: 5px;
+  }
+}
+
+.dashboard-metrics {
+  padding-top: 200px;
+  padding-bottom: 200px;
+  text-align: center;
+}
+.dashboard-metrics p {
+  font-size: 24px;
+  line-height: 28px;
+  font-weight: 500;
+  color: #ffffff;
+}
+
+/*# sourceMappingURL=logmanager.dark.css.map */

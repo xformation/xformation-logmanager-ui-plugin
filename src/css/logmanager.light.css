@@ -1,0 +1,44 @@
+.breadcrumbs-container {
+  background-color: #eff2f7;
+  padding: 14px 20px 15px;
+  font-size: 13px;
+}
+.breadcrumbs-container .page-title {
+  color: #3b4859;
+  display: inline-block;
+}
+.breadcrumbs-container .breadcrumbs {
+  float: right;
+}
+.breadcrumbs-container a.breadcrumbs-link {
+  color: #89898a;
+}
+.breadcrumbs-container .current-page {
+  color: #2a9ce7;
+}
+.breadcrumbs-container .separator {
+  color: #89898a;
+  display: inline-block;
+  padding: 0 10px;
+}
+
+@media (max-width: 768px) {
+  .breadcrumbs-container .breadcrumbs {
+    float: none;
+    padding-top: 5px;
+  }
+}
+
+.dashboard-metrics {
+  padding-top: 200px;
+  padding-bottom: 200px;
+  text-align: center;
+}
+.dashboard-metrics p {
+  font-size: 24px;
+  line-height: 28px;
+  font-weight: 500;
+  color: #3b4859;
+}
+
+/*# sourceMappingURL=logmanager.light.css.map */

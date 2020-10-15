@@ -2,65 +2,113 @@ import * as React from 'react';
 import { Link } from 'react-router-dom';
 import { config } from '../../config';
 import { Breadcrumbs } from '../Breadcrumbs';
-import { ManageDashboards } from './ManageDashboards';
+import { CreateStreamPopup } from './createStreamPopup';
+import { NewStreamRulePopup } from './newStreamRulePopup';
 export class Dashboard extends React.Component<any, any> {
     breadCrumbs: any;
+    createStreamRef: any;
     constructor(props: any) {
         super(props);
-        this.state = {};
         this.breadCrumbs = [
             {
                 label: "Home",
                 route: `/`
             },
             {
-                label: "Perfmanager | Dashboard",
-                isCurrentPage: true
+                label: "Monitor",
+                route: `/`
             }
         ];
+        this.createStreamRef = React.createRef();
     }
 
+    onClickOpenCreateStreamPopup = (e: any) => {
+        this.createStreamRef.current.toggle();
+    };
+
+
     render() {
-        const state = this.state;
         return (
-            <div className="perfmanager-dashboard-container">
-                <Breadcrumbs breadcrumbs={this.breadCrumbs} pageTitle="PREFORMANCE MANAGEMENT" />
-                <div className="perfmanager-page-container">
-                    <div className="common-container">
+            <div className="">
+                <Breadcrumbs breadcrumbs={this.breadCrumbs} pageTitle="Log Managment" />
+                <div className="container">
+                    <div className="row">
+                        <button>Search</button>
+                        <button>Streams</button>
+                        <button>Alerts</button>
+                        <button>Dashboard</button>
+                        <button>Input</button>
+                        <button>Pipeline</button>
+                    </div>
+                    <div className="">
+                        <h3>STREAMS</h3>
+                        <span>You can route incoming messeges into streams by applying rules against them. Messages matching the rules of a stream are routed it. A message can also be routed into multiple streams</span>
+                    </div>
+                    <div className="">
+                        <div className="">
+                            <button>
+                                <i className="fa fa-search"></i>
+                            </button>
+                            <input type="text" className="input-group-text" />
+                        </div>
+                        <div className="">
+                            <button>Filter</button>
+                            <button>Reset</button>
+                        </div>
+                    </div>
+                    <div className="TableContainer">
                         <div className="row">
-                            <div className="col-lg-12 col-md-12 col-sm-12">
-                                <Link to={`${config.basePath}/managedashboard`} className="blue-button">
-                                    <i className="fa fa-cog"></i>&nbsp;&nbsp;
-                                    Manage Dashboards
-                                </Link>
-                                <Link to={`${config.basePath}/catalog`} className="blue-button">
-                                    <i className="fa fa-cog"></i>&nbsp;&nbsp;
-                                    Catalog
-                                </Link>
-                                <Link to={`${config.basePath}/library`} className="blue-button">
-                                    <i className="fa fa-cog"></i>&nbsp;&nbsp;
-                                    Library
-                                </Link>
-                                <Link to={`${config.basePath}/collectionview`} className="blue-button">
-                                    <i className="fa fa-cog"></i>&nbsp;&nbsp;
-                                    Collection
-                                </Link>
-                                <Link to="/plugins/xformation-alertmanager-ui-plugin/page/managealertrule" className="blue-button">
-                                    <i className="fa fa-cog"></i>&nbsp;&nbsp;
-                                    Rule
-                                </Link>
-                                <a className="blue-button">
-                                    <i className="fa fa-cog"></i>&nbsp;&nbsp;
-                                    Preferences
-                                </a>
+                            <div className="col-lg-3 col-md-3 col-sm-6">
+                                <span>All Events</span>
+                                <span>Index set: Graylog Events</span>
+                            </div>
+                            <div className="col-lg-7 col-md-7 col-sm-6">
+                                <span>Stream containing all events created by synetics Log Managment 0 Messages/second. No configured rules.<a>Show Stream Rules</a></span>
+                                <button>Manage Rules</button>
+                                <button>Manage Output</button>
+                                <button>Manage Alerts</button>
+                            </div>
+                        </div>
+                        <div className="row">
+                            <div className="col-lg-3 col-md-3 col-sm-6">
+                                <span>All Messages</span>
+                                <span>Index set: Graylog Events</span>
+                            </div>
+                            <div className="col-lg-7 col-md-7 col-sm-6">
+                                <span>Stream containing all Messages 0 Messages/second. No configured rules.<a>Show Stream Rules</a></span>
+                                <button>Manage Rules</button>
+                                <button>Manage Output</button>
+                                <button>Manage Alerts</button>
                             </div>
 
                         </div>
-                    </div>
-                    <div className="common-container border-bottom-0">
-                        <ManageDashboards />
+                        <div className="row">
+                            <div className="col-lg-3 col-md-3 col-sm-6">
+                                <span>All System Events</span>
+                                <span>Index set: Graylog Events</span>
+                            </div>
+                            <div className="col-lg-7 col-md-7 col-sm-6">
+                                <span>Stream containing all events created by synetics Log Managment 0 Messages/second. No configured rules.<a>Show Stream Rules</a></span>
+                                <button>Manage Rules</button>
+                                <button>Manage Output</button>
+                                <button>Manage Alerts</button>
+                            </div>
+                        </div>
+                        <div className="row">
+                            <div className="col-lg-3 col-md-3 col-sm-6">
+                                <span>All Events</span>
+                                <span>Index set: Graylog Events</span>
+                            </div>
+                            <div className="col-lg-7 col-md-7 col-sm-6">
+                                <span>Stream containing all events created by synetics Log Managment 0 Messages/second. No configured rules.<a>Show Stream Rules</a></span>
+                                <button>Manage Rules</button>
+                                <button>Manage Output</button>
+                                <button>Manage Alerts</button>
+                            </div>
+                        </div>
                     </div>
                 </div>
+                <CreateStreamPopup ref={this.createStreamRef} />
             </div>
         );
     }
