@@ -76,6 +76,7 @@
                         line-height: 18px;
                         color: #3b7cff;
                         margin-bottom: 5px;
+                        cursor: pointer;
                     }
                     p{
                         margin-bottom: 3px;
@@ -85,6 +86,9 @@
                     }
                     .blue-button{
                         font-size: 12px;
+                    }
+                    .table-btns{
+                        position: relative;
                     }
                     .btn-link{
                         color: #3b7cff;

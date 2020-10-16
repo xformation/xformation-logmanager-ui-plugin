@@ -1,6 +1,6 @@
 import { Checkbox } from '@material-ui/core';
 import * as React from 'react';
-import { Modal, ModalBody } from 'reactstrap';
+import { Modal, ModalBody, ModalHeader } from 'reactstrap';
 
 
 export class AllEventsPopup extends React.Component<any, any> {
@@ -28,13 +28,10 @@ export class AllEventsPopup extends React.Component<any, any> {
     render() {
         const { modal } = this.state;
         return (
-            <Modal isOpen={modal} toggle={this.toggle} className="modal-container">
-                <button className="close-btn" onClick={this.handleClose}>X</button>
-                <ModalBody style={{ height: 'calc(75vh - 50px)', overflowY: 'auto', overflowX: "hidden" }}>
+            <Modal isOpen={modal} toggle={this.toggle} className="modal-container logmanager-modal-container">
+                <ModalHeader toggle={this.toggle}>All Events | <span>Manage Rules</span></ModalHeader>
+                <ModalBody style={{ height: 'calc(60vh - 50px)', overflowY: 'auto', overflowX: "hidden" }}>
                     <div className="d-block width-100 stream-popup-container">
-                        <div className="d-block width-100 p-b-20 heading">
-                            <h4 className="d-block">All Events | Manage Rules</h4>
-                        </div>
                         <div className="">
                             <span>Load a message to test Rule</span>
                             <button>Recent Messages</button>
@@ -72,7 +69,7 @@ export class AllEventsPopup extends React.Component<any, any> {
                         </div>
                         <div className="row">
                             <div className="col-lg-12 col-md-12 col-sm-12">
-                                <div className="d-block text-center p-t-20 contact-popup-buttons">
+                                <div className="d-block text-right p-t-20 contact-popup-buttons">
                                     <button className="cancel" onClick={this.handleClose}>Cancel</button>
                                     <button className="save">Save</button>
                                 </div>

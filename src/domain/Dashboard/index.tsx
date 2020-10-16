@@ -65,8 +65,7 @@ export class Dashboard extends React.Component<any, any> {
 
     onClickOpenCreateStreamPopup = (e: any) => {
         this.createStreamRef.current.toggle();
-    };
-
+    }
     openNewStreamPopup = (e: any) => {
         this.newStreamRef.current.toggle();
     }
@@ -107,29 +106,20 @@ export class Dashboard extends React.Component<any, any> {
                                         <button className="blue-button m-b-0" onClick={this.OpenManageOutputPopup}>Manage Output</button>
                                         <button className="blue-button m-b-0">Manage Alerts</button>
                                     </div>
-                                    <div className="d-inline-block">
+                                    <div className="d-inline-block table-btns">
+                                        <div className="d-inline-block enabled-disabled-container">
+                                            <div className="enabled"></div>
+                                        </div>
                                         <button className="btn btn-link"><i className="fa fa-edit"></i></button>
                                         <button className="btn btn-link"><i className="fa fa-trash"></i></button>
                                         <button className="btn btn-link" onClick={this.onClickOpenSubLink}><i className="fa fa-ellipsis-h"></i></button>
                                         {openCreateMenu == true && <div className="text-center open-create-menu">
-                                            <a>
-                                                Manage Rules
-                                                                    </a>
-                                            <a>
-                                                MAnage Outputs
-                                                                    </a>
-                                            <a>
-                                                MAnage Alerts
-                                                                    </a>
-                                            <a>
-                                                Edit Stream
-                                                                    </a>
-                                            <a>
-                                                Quick Add Rule
-                                                                    </a>
-                                            <a>
-                                                Clone this Stream
-                                                                    </a>
+                                            <a href="#">Manage Rules</a>
+                                            <a href="#">MAnage Outputs</a>
+                                            <a href="#">MAnage Alerts</a>
+                                            <a href="#">Edit Stream</a>
+                                            <a href="#">Quick Add Rule</a>
+                                            <a href="#">Clone this Stream</a>
                                         </div>
                                         }
                                     </div>
