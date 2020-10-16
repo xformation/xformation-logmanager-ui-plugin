@@ -15,6 +15,38 @@ export class Dashboard extends React.Component<any, any> {
     allEventRef: any;
     constructor(props: any) {
         super(props);
+        this.state = {
+            openCreateMenu: false,
+            StreamTableData: [
+                {
+                    title: 'All Events',
+                    eventName: 'Index set: Graylog Events',
+                    description1: 'Stream containing all events created by synetics Log Managment',
+                    description2: '0 Messages/second. No configured rules.',
+                    descriptionLink: 'Show Stream Rules',
+                },
+                {
+                    title: 'All Messages',
+                    eventName: 'Index set: Graylog Events',
+                    description1: 'Stream containing all Messages',
+                    description2: '0 Messages/second. No configured rules.',
+                    descriptionLink: 'Show Stream Rules',
+                },
+                {
+                    title: 'All System Events',
+                    eventName: 'Index set: Graylog Events',
+                    description1: 'Stream containing all events created by synetics Log Managment',
+                    description2: '0 Messages/second. No configured rules.',
+                    descriptionLink: 'Show Stream Rules',
+                }, {
+                    title: 'All Events',
+                    eventName: 'Index set: Graylog Events',
+                    description1: 'Stream containing all events created by synetics Log Managment',
+                    description2: '0 Messages/second. No configured rules.',
+                    descriptionLink: 'Show Stream Rules',
+                }
+            ]
+        }
         this.breadCrumbs = [
             {
                 label: "Home",
@@ -44,8 +76,75 @@ export class Dashboard extends React.Component<any, any> {
     OpenAllEventsPopup = (a: any) => {
         this.allEventRef.current.toggle();
     }
+    onClickOpenSubLink = () => {
+        let menu = !this.state.openCreateMenu;
+        this.setState({
+            openCreateMenu: menu,
+        });
+    }
+
+    displayTableOfStream = () => {
+        const { StreamTableData, openCreateMenu } = this.state;
+        let retData = [];
+        for (let i = 0; i < StreamTableData.length; i++) {
+            let rowData = StreamTableData[i];
+            retData.push(
+                <tr>
+                    <td>
+                        <h4 onClick={this.OpenAllEventsPopup}>{rowData.title}</h4>
+                        <span>{rowData.eventName}</span>
+                    </td>
+                    <td>
+                        <table className="inner-table">
+                            <tr>
+                                <td>
+                                    <p>{rowData.description1}</p>
+                                    <p>{rowData.description2}&nbsp;&nbsp; <a href="#">{rowData.descriptionLink}</a></p>
+                                </td>
+                                <td>
+                                    <div className="d-inline-block">
+                                        <button className="blue-button m-b-0" onClick={this.openNewStreamPopup}>Manage Rules</button>
+                                        <button className="blue-button m-b-0" onClick={this.OpenManageOutputPopup}>Manage Output</button>
+                                        <button className="blue-button m-b-0">Manage Alerts</button>
+                                    </div>
+                                    <div className="d-inline-block">
+                                        <button className="btn btn-link"><i className="fa fa-edit"></i></button>
+                                        <button className="btn btn-link"><i className="fa fa-trash"></i></button>
+                                        <button className="btn btn-link" onClick={this.onClickOpenSubLink}><i className="fa fa-ellipsis-h"></i></button>
+                                        {openCreateMenu == true && <div className="text-center open-create-menu">
+                                            <a>
+                                                Manage Rules
+                                                                    </a>
+                                            <a>
+                                                MAnage Outputs
+                                                                    </a>
+                                            <a>
+                                                MAnage Alerts
+                                                                    </a>
+                                            <a>
+                                                Edit Stream
+                                                                    </a>
+                                            <a>
+                                                Quick Add Rule
+                                                                    </a>
+                                            <a>
+                                                Clone this Stream
+                                                                    </a>
+                                        </div>
+                                        }
+                                    </div>
+                                </td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+            );
+        }
+        return retData;
+    }
 
     render() {
+        const { openCreateMenu } = this.state;
         return (
             <div className="logmanager-dashboard-container">
                 <Breadcrumbs breadcrumbs={this.breadCrumbs} pageTitle="LOG MANAGMENT" />
@@ -85,118 +184,7 @@ export class Dashboard extends React.Component<any, any> {
                             <div className="table-container-inner">
                                 <table className="table">
                                     <tbody>
-                                        <tr>
-                                            <td>
-                                                <h4 onClick={this.OpenAllEventsPopup}>All Events</h4>
-                                                <span>Index set: Graylog Events</span>
-                                            </td>
-                                            <td>
-                                                <table className="inner-table">
-                                                    <tr>
-                                                        <td>
-                                                            <p>Stream containing all events created by synetics Log Managment</p>
-                                                            <p>0 Messages/second. No configured rules.&nbsp;&nbsp; <a href="#">Show Stream Rules</a></p>
-                                                        </td>
-                                                        <td>
-                                                            <div className="d-inline-block">
-                                                                <button className="blue-button m-b-0" onClick={this.openNewStreamPopup}>Manage Rules</button>
-                                                                <button className="blue-button m-b-0" onClick={this.OpenManageOutputPopup}>Manage Output</button>
-                                                                <button className="blue-button m-b-0">Manage Alerts</button>
-                                                            </div>
-                                                            <div className="d-inline-block">
-                                                                <button className="btn btn-link"><i className="fa fa-edit"></i></button>
-                                                                <button className="btn btn-link"><i className="fa fa-trash"></i></button>
-                                                                <button className="btn btn-link"><i className="fa fa-ellipsis-h"></i></button>
-                                                            </div>
-                                                        </td>
-                                                    </tr>
-                                                </table>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>
-                                                <h4>All Messages</h4>
-                                                <span>Index set: Graylog Events</span>
-                                            </td>
-                                            <td>
-                                                <table className="inner-table">
-                                                    <tr>
-                                                        <td>
-                                                            <p>Stream containing all Messages</p>
-                                                            <p>0 Messages/second. No configured rules.&nbsp;&nbsp; <a href="#">Show Stream Rules</a></p>
-                                                        </td>
-                                                        <td>
-                                                            <div className="d-inline-block">
-                                                                <button className="blue-button m-b-0">Manage Rules</button>
-                                                                <button className="blue-button m-b-0">Manage Output</button>
-                                                                <button className="blue-button m-b-0">Manage Alerts</button>
-                                                            </div>
-                                                            <div className="d-inline-block">
-                                                                <button className="btn btn-link"><i className="fa fa-edit"></i></button>
-                                                                <button className="btn btn-link"><i className="fa fa-trash"></i></button>
-                                                                <button className="btn btn-link"><i className="fa fa-ellipsis-h"></i></button>
-                                                            </div>
-                                                        </td>
-                                                    </tr>
-                                                </table>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>
-                                                <h4>All System Events</h4>
-                                                <span>Index set: Graylog Events</span>
-                                            </td>
-                                            <td>
-                                                <table className="inner-table">
-                                                    <tr>
-                                                        <td>
-                                                            <p>Stream containing all events created by synetics Log Managment</p>
-                                                            <p>0 Messages/second. No configured rules.&nbsp;&nbsp; <a href="#">Show Stream Rules</a></p>
-                                                        </td>
-                                                        <td>
-                                                            <div className="d-inline-block">
-                                                                <button className="blue-button m-b-0">Manage Rules</button>
-                                                                <button className="blue-button m-b-0">Manage Output</button>
-                                                                <button className="blue-button m-b-0">Manage Alerts</button>
-                                                            </div>
-                                                            <div className="d-inline-block">
-                                                                <button className="btn btn-link"><i className="fa fa-edit"></i></button>
-                                                                <button className="btn btn-link"><i className="fa fa-trash"></i></button>
-                                                                <button className="btn btn-link"><i className="fa fa-ellipsis-h"></i></button>
-                                                            </div>
-                                                        </td>
-                                                    </tr>
-                                                </table>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>
-                                                <h4>All Events</h4>
-                                                <span>Index set: Graylog Events</span>
-                                            </td>
-                                            <td>
-                                                <table className="inner-table">
-                                                    <tr>
-                                                        <td>
-                                                            <p>Stream containing all events created by synetics Log Managment</p>
-                                                            <p>0 Messages/second. No configured rules.&nbsp;&nbsp; <a href="#">Show Stream Rules</a></p>
-                                                        </td>
-                                                        <td>
-                                                            <div className="d-inline-block">
-                                                                <button className="blue-button m-b-0">Manage Rules</button>
-                                                                <button className="blue-button m-b-0">Manage Output</button>
-                                                                <button className="blue-button m-b-0">Manage Alerts</button>
-                                                            </div>
-                                                            <div className="d-inline-block">
-                                                                <button className="btn btn-link"><i className="fa fa-edit"></i></button>
-                                                                <button className="btn btn-link"><i className="fa fa-trash"></i></button>
-                                                                <button className="btn btn-link"><i className="fa fa-ellipsis-h"></i></button>
-                                                            </div>
-                                                        </td>
-                                                    </tr>
-                                                </table>
-                                            </td>
-                                        </tr>
+                                        {this.displayTableOfStream()}
                                     </tbody>
                                 </table>
                             </div>
@@ -206,7 +194,7 @@ export class Dashboard extends React.Component<any, any> {
                 <CreateStreamPopup ref={this.createStreamRef} />
                 <NewStreamRulePopup ref={this.newStreamRef} />
                 <SetOutputPopup ref={this.manageOutputRef} />
-                <AllEventsPopup ref={this.allEventRef}/>
+                <AllEventsPopup ref={this.allEventRef} />
             </div>
         );
     }
