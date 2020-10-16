@@ -24,6 +24,7 @@ export class Dashboard extends React.Component<any, any> {
                     description1: 'Stream containing all events created by synetics Log Managment',
                     description2: '0 Messages/second. No configured rules.',
                     descriptionLink: 'Show Stream Rules',
+                    actionStatus: false,
                 },
                 {
                     title: 'All Messages',
@@ -31,6 +32,7 @@ export class Dashboard extends React.Component<any, any> {
                     description1: 'Stream containing all Messages',
                     description2: '0 Messages/second. No configured rules.',
                     descriptionLink: 'Show Stream Rules',
+                    actionStatus: false,
                 },
                 {
                     title: 'All System Events',
@@ -38,12 +40,14 @@ export class Dashboard extends React.Component<any, any> {
                     description1: 'Stream containing all events created by synetics Log Managment',
                     description2: '0 Messages/second. No configured rules.',
                     descriptionLink: 'Show Stream Rules',
+                    actionStatus: false,
                 }, {
                     title: 'All Events',
                     eventName: 'Index set: Graylog Events',
                     description1: 'Stream containing all events created by synetics Log Managment',
                     description2: '0 Messages/second. No configured rules.',
                     descriptionLink: 'Show Stream Rules',
+                    actionStatus: false,
                 }
             ]
         }
@@ -75,15 +79,21 @@ export class Dashboard extends React.Component<any, any> {
     OpenAllEventsPopup = (a: any) => {
         this.allEventRef.current.toggle();
     }
-    onClickOpenSubLink = () => {
-        let menu = !this.state.openCreateMenu;
+    onClickOpenSubLink = (index: any) => {
+        const { StreamTableData } = this.state;
+        for (let i = 0; i < StreamTableData.length; i++) {
+            let status = StreamTableData[i].actionStatus;
+            if (i == index) {
+                StreamTableData[i].actionStatus = !status;
+            }
+        }
         this.setState({
-            openCreateMenu: menu,
-        });
+            StreamTableData
+        })
     }
 
     displayTableOfStream = () => {
-        const { StreamTableData, openCreateMenu } = this.state;
+        const { StreamTableData } = this.state;
         let retData = [];
         for (let i = 0; i < StreamTableData.length; i++) {
             let rowData = StreamTableData[i];
@@ -112,8 +122,8 @@ export class Dashboard extends React.Component<any, any> {
                                         </div>
                                         <button className="btn btn-link"><i className="fa fa-edit"></i></button>
                                         <button className="btn btn-link"><i className="fa fa-trash"></i></button>
-                                        <button className="btn btn-link" onClick={this.onClickOpenSubLink}><i className="fa fa-ellipsis-h"></i></button>
-                                        {openCreateMenu == true && <div className="text-center open-create-menu">
+                                        <button className="btn btn-link" onClick={() => this.onClickOpenSubLink(i)}><i className="fa fa-ellipsis-h"></i></button>
+                                        {rowData.actionStatus == true && <div className="text-center open-create-menu">
                                             <a href="#">Manage Rules</a>
                                             <a href="#">MAnage Outputs</a>
                                             <a href="#">MAnage Alerts</a>
