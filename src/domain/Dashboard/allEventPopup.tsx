@@ -9,7 +9,7 @@ export class AllEventsPopup extends React.Component<any, any> {
         super(props);
         this.state = {
             modal: false,
-
+            activeTab: 0,
         };
     }
 
@@ -24,48 +24,104 @@ export class AllEventsPopup extends React.Component<any, any> {
         });
     }
 
+    setActiveTab = (activeTab: any) => {
+        this.setState({
+            activeTab
+        });
+    };
+
 
     render() {
-        const { modal } = this.state;
+        const { modal, activeTab } = this.state;
         return (
             <Modal isOpen={modal} toggle={this.toggle} className="modal-container logmanager-modal-container">
                 <ModalHeader toggle={this.toggle}>All Events | <span>Manage Rules</span></ModalHeader>
                 <ModalBody style={{ height: 'calc(60vh - 50px)', overflowY: 'auto', overflowX: "hidden" }}>
                     <div className="d-block width-100 stream-popup-container">
-                        <div className="">
+                        <div className="message-tabs-container">
                             <span>Load a message to test Rule</span>
-                            <button>Recent Messages</button>
-                            <button>Message Id</button>
-                            <span>Select an input from the list below and click "Lod messages" to load the most recent message received by this input within the last hour.</span>
-                        </div>
-                        <div className="row">
-                            <div className="col-lg-12 col-md-12 col-sm-12">
-                                <div className="form-group">
-                                    <select>
-                                        <option value="">Select input</option>
-                                        <option value="abc">ABC</option>
-                                        <option value="def">DEF</option>
-                                        <option value="hij">HIJ</option>
-                                        <option value="klm">KLM</option>
-                                    </select>
+                            <div className="messages-tabs">
+                                <ul>
+                                    <li className={activeTab === 0 ? "active-tab" : ''} onClick={e => this.setActiveTab(0)}>
+                                        <a href="#">Recwnt Messages</a>
+                                    </li>
+                                    <li className={activeTab === 1 ? "active-tab" : ''} onClick={e => this.setActiveTab(1)}>
+                                        <a href="#">Message ID</a>
+                                    </li>
+                                </ul>
+                                <div className="tab-container">
+                                    {activeTab === 0 &&
+                                        <div>
+                                            <div className="lod-messages">Select an input from the list below and click "Lod messages" to load the most recent message received by this input within the last hour.</div>
+                                            <div className="row">
+                                                <div className="col-lg-12 col-md-12 col-sm-12">
+                                                    <div className="form-group">
+                                                        <select className="input-group-text">
+                                                            <option value="">Select input</option>
+                                                            <option value="abc">ABC</option>
+                                                            <option value="def">DEF</option>
+                                                            <option value="hij">HIJ</option>
+                                                            <option value="klm">KLM</option>
+                                                        </select>
+                                                        <button className="blue-button">Load Messages</button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    }
+                                    {activeTab === 1 &&
+                                        <div>
+                                            <div className="lod-messages">Please provide the id and index of the message that you want to load in this form.</div>
+                                            <div className="row">
+                                                <div className="col-lg-12 col-md-12 col-sm-12">
+                                                    <div className="form-group">
+                                                        <select className="input-group-text">
+                                                            <option value="">Message ID</option>
+                                                            <option value="abc">ABC</option>
+                                                            <option value="def">DEF</option>
+                                                            <option value="hij">HIJ</option>
+                                                            <option value="klm">KLM</option>
+                                                        </select>
+                                                        <select className="input-group-text">
+                                                            <option value="">Index</option>
+                                                            <option value="abc">ABC</option>
+                                                            <option value="def">DEF</option>
+                                                            <option value="hij">HIJ</option>
+                                                            <option value="klm">KLM</option>
+                                                        </select>
+                                                        <button className="blue-button">Load Messages</button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    }
                                 </div>
-                                <button>Load Messages</button>
                             </div>
                         </div>
-                        <div className="row">
-                            <div className="col-lg-12 col-md-12 col-sm-12">
-                                <h4>Manage Stream Rules</h4>
-                                <button>Add Rules</button>
+                        <div className="rules-defined">
+                            <div className="manage-rules">
+                                <div className="row">
+                                    <div className="col-lg-10 col-md-10 col-sm-12">
+                                        <h4>Manage Stream Rules</h4>
+                                        <span>Please load a message to check if it would match against these rules and therefore be routed into this stream.</span>
+                                    </div>
+                                    <div className="col-lg-2 col-md-2 col-sm-12">
+                                        <button className="blue-button">Add Rules</button>
+                                    </div>
+                                </div>
                             </div>
-                        </div>
-                        <div className="row">
-                            <div className="col-lg-12 col-md-12 col-sm-12">
-                                <span>Please load a message to check if it would match against these rules and therefore be routed into this stream.</span>
+                            <div className="check-group">
+                                <input type="radio" value="1" name="gender" /> 
+                                <label>Stream containing all events created by synectics Log Managment</label>
                             </div>
-                        </div>
-                        <div className="">
-                            <input type="radio" value="1" name="gender" /> Stream containing all events created by synectics Log Managment
-                            <input type="radio" value="2" name="gender" /> Stream containing all events created by synectics Log Managment
+                            <div className="check-group">
+                                <input type="radio" value="2" name="gender" /> 
+                                <label>Stream containing all events created by synectics Log Managment</label>
+                            </div>
+                            <div className="no-rules-defined">
+                                <i className="fa fa-info-circle"></i>
+                                <span>No rules defined</span>
+                            </div>
                         </div>
                         <div className="row">
                             <div className="col-lg-12 col-md-12 col-sm-12">
