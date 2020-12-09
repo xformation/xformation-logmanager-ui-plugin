@@ -15,7 +15,6 @@ export class CreateStreamPopup extends React.Component<any, any> {
             indexSet: '',
             isSubmitted: false,
             removeMatches: false,
-
         };
     }
     onStateChange = (e: any) => {

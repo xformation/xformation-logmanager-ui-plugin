@@ -7,6 +7,18 @@ import { NewStreamRulePopup } from './newStreamRulePopup';
 import { SetOutputPopup } from './setOutputParameter';
 import { AllEventsPopup } from './allEventPopup';
 
+class StreamData{
+    id:any;
+    title:any;
+    indexSet:any;
+    description:any;
+    rules:any;
+
+}
+let indexSetMap = new Map();
+indexSetMap.set("5fb950ef6439c846ee76f455","Default index set");
+indexSetMap.set("5fb95bb004a35d1e34e9baa6","GrayLog Events");
+indexSetMap.set("5fb95bb004a35d1e34e9baa8","GrayLog System Event");
 export class Dashboard extends React.Component<any, any> {
     breadCrumbs: any;
     createStreamRef: any;
@@ -17,39 +29,7 @@ export class Dashboard extends React.Component<any, any> {
         super(props);
         this.state = {
             openCreateMenu: false,
-            StreamTableData: [
-                {
-                    title: 'All Events',
-                    eventName: 'Index set: Graylog Events',
-                    description1: 'Stream containing all events created by synetics Log Managment',
-                    description2: '0 Messages/second. No configured rules.',
-                    descriptionLink: 'Show Stream Rules',
-                    actionStatus: false,
-                },
-                {
-                    title: 'All Messages',
-                    eventName: 'Index set: Graylog Events',
-                    description1: 'Stream containing all Messages',
-                    description2: '0 Messages/second. No configured rules.',
-                    descriptionLink: 'Show Stream Rules',
-                    actionStatus: false,
-                },
-                {
-                    title: 'All System Events',
-                    eventName: 'Index set: Graylog Events',
-                    description1: 'Stream containing all events created by synetics Log Managment',
-                    description2: '0 Messages/second. No configured rules.',
-                    descriptionLink: 'Show Stream Rules',
-                    actionStatus: false,
-                }, {
-                    title: 'All Events',
-                    eventName: 'Index set: Graylog Events',
-                    description1: 'Stream containing all events created by synetics Log Managment',
-                    description2: '0 Messages/second. No configured rules.',
-                    descriptionLink: 'Show Stream Rules',
-                    actionStatus: false,
-                }
-            ]
+            streamTableData: []
         }
         this.breadCrumbs = [
             {
@@ -80,35 +60,67 @@ export class Dashboard extends React.Component<any, any> {
         this.allEventRef.current.toggle();
     }
     onClickOpenSubLink = (index: any) => {
-        const { StreamTableData } = this.state;
-        for (let i = 0; i < StreamTableData.length; i++) {
-            let status = StreamTableData[i].actionStatus;
+        const { streamTableData } = this.state;
+        for (let i = 0; i < streamTableData.length; i++) {
+            let status = streamTableData[i].actionStatus;
             if (i == index) {
-                StreamTableData[i].actionStatus = !status;
+                streamTableData[i].actionStatus = !status;
             }
         }
         this.setState({
-            StreamTableData
+            streamTableData
         })
     }
+    async componentDidMount(){
+        console.log("componentDidMountMethod called");
+        var myHeaders = new Headers();
+            myHeaders.append("X-Requested-By", "XMLHttpRequest");
+            myHeaders.append("Authorization", "Basic YWRtaW46YWRtaW4=");
+            myHeaders.append("Content-Type", "application/json");
+        var requestOptions: RequestInit = {
+            method: 'GET',
+            headers: myHeaders,
+            redirect: 'follow'
+        };
+
+        await fetch(config.STREAM, requestOptions)
+            .then(response => response.text())
+            .then(result => {
+                 var streams=JSON.parse(result).streams;
+                    console.log("sreams : ",streams);
+                    streams.forEach((item : any)=> {
+                        item.index_set_id=indexSetMap.get(item.index_set_id);
+                    });
+                    console.log("stream after change", streams);
+                    this.setState({
+                        streamTableData:streams,
+                    });
+
+            }
+            )
+            .catch(error => console.log('error', error));
+    }
+    
 
     displayTableOfStream = () => {
-        const { StreamTableData } = this.state;
+        const { streamTableData } = this.state;
         let retData = [];
-        for (let i = 0; i < StreamTableData.length; i++) {
-            let rowData = StreamTableData[i];
+        for (let i = 0; i < streamTableData.length; i++) {
+            let rowData = streamTableData[i];
             retData.push(
                 <tr>
                     <td>
                         <h4 onClick={this.OpenAllEventsPopup}>{rowData.title}</h4>
-                        <span>{rowData.eventName}</span>
+                        <span>Index set: &nbsp;&nbsp;{rowData.index_set_id}</span>
                     </td>
                     <td>
                         <table className="inner-table">
                             <tr>
                                 <td>
-                                    <p>{rowData.description1}</p>
-                                    <p>{rowData.description2}&nbsp;&nbsp; <a href="#">{rowData.descriptionLink}</a></p>
+                                    <p>{rowData.description}</p>
+                                    <p>{rowData.rules}&nbsp;&nbsp; 
+                                    {/* <a href="#">{rowData.descriptionLink}</a> */}
+                                    </p>
                                 </td>
                                 <td>
                                     <div className="d-inline-block">
