@@ -6,6 +6,7 @@ import { CreateStreamPopup } from './createStreamPopup';
 import { NewStreamRulePopup } from './newStreamRulePopup';
 import { SetOutputPopup } from './setOutputParameter';
 import { AllEventsPopup } from './allEventPopup';
+import { TopMenu } from './topMenu';
 
 class StreamData{
     id:any;
@@ -161,15 +162,7 @@ export class Dashboard extends React.Component<any, any> {
             <div className="logmanager-dashboard-container">
                 <Breadcrumbs breadcrumbs={this.breadCrumbs} pageTitle="LOG MANAGMENT" />
                 <div className="logmanager-page-container">
-                    <div className="common-container">
-                        <button className="blue-button"><i className="fa fa-cog"></i>&nbsp;&nbsp; Search</button>
-                        <button className="blue-button"><i className="fa fa-cog"></i>&nbsp;&nbsp; Streams</button>
-                        <button className="blue-button"><i className="fa fa-cog"></i>&nbsp;&nbsp; Alerts</button>
-                        <button className="blue-button"><i className="fa fa-cog"></i>&nbsp;&nbsp; Dashboard</button>
-                        <button className="blue-button"><i className="fa fa-cog"></i>&nbsp;&nbsp; Input</button>
-                        <button className="blue-button"><i className="fa fa-cog"></i>&nbsp;&nbsp; Pipeline</button>
-                        <button className="white-button float-right back-btn"><i className="fa fa-arrow-circle-left"></i>&nbsp;&nbsp; Back</button>
-                    </div>
+                   <TopMenu/>
                     <div className="common-container">
                         <div className="streams-text">
                             <h3>STREAMS</h3>
