@@ -8,18 +8,18 @@ import { SetOutputPopup } from './setOutputParameter';
 import { AllEventsPopup } from './allEventPopup';
 import { TopMenu } from './topMenu';
 
-class StreamData{
-    id:any;
-    title:any;
-    indexSet:any;
-    description:any;
-    rules:any;
+class StreamData {
+    id: any;
+    title: any;
+    indexSet: any;
+    description: any;
+    rules: any;
 
 }
 let indexSetMap = new Map();
-indexSetMap.set("5fb950ef6439c846ee76f455","Default index set");
-indexSetMap.set("5fb95bb004a35d1e34e9baa6","GrayLog Events");
-indexSetMap.set("5fb95bb004a35d1e34e9baa8","GrayLog System Event");
+indexSetMap.set("5fb950ef6439c846ee76f455", "Default index set");
+indexSetMap.set("5fb95bb004a35d1e34e9baa6", "GrayLog Events");
+indexSetMap.set("5fb95bb004a35d1e34e9baa8", "GrayLog System Event");
 export class Dashboard extends React.Component<any, any> {
     breadCrumbs: any;
     createStreamRef: any;
@@ -29,6 +29,7 @@ export class Dashboard extends React.Component<any, any> {
     constructor(props: any) {
         super(props);
         this.state = {
+            tcpInputs: [],
             openCreateMenu: false,
             streamTableData: []
         }
@@ -72,12 +73,12 @@ export class Dashboard extends React.Component<any, any> {
             streamTableData
         })
     }
-    async componentDidMount(){
+    async componentDidMount() {
         console.log("componentDidMountMethod called");
         var myHeaders = new Headers();
-            myHeaders.append("X-Requested-By", "XMLHttpRequest");
-            myHeaders.append("Authorization", "Basic YWRtaW46YWRtaW4=");
-            myHeaders.append("Content-Type", "application/json");
+        myHeaders.append("X-Requested-By", "XMLHttpRequest");
+        myHeaders.append("Authorization", "Basic YWRtaW46YWRtaW4=");
+        myHeaders.append("Content-Type", "application/json");
         var requestOptions: RequestInit = {
             method: 'GET',
             headers: myHeaders,
@@ -87,21 +88,30 @@ export class Dashboard extends React.Component<any, any> {
         await fetch(config.STREAM, requestOptions)
             .then(response => response.text())
             .then(result => {
-                 var streams=JSON.parse(result).streams;
-                    console.log("sreams : ",streams);
-                    streams.forEach((item : any)=> {
-                        item.index_set_id=indexSetMap.get(item.index_set_id);
-                    });
-                    console.log("stream after change", streams);
-                    this.setState({
-                        streamTableData:streams,
-                    });
-
+                var streams = JSON.parse(result).streams;
+                console.log("sreams : ", streams);
+                streams.forEach((item: any) => {
+                    item.index_set_id = indexSetMap.get(item.index_set_id);
+                });
+                console.log("stream after change", streams);
+                this.setState({
+                    streamTableData: streams,
+                });
             }
-            )
-            .catch(error => console.log('error', error));
+            ).catch(error => console.log('error', error));
+
+        await fetch(config.TCP_INPUT_STREAM, requestOptions)
+            .then(response => response.text())
+            .then(result => {
+                console.log("Json ", JSON.parse(result));
+                var inputs = JSON.parse(result).inputs;
+                this.setState({
+                    tcpInputs: inputs,
+                });
+            }
+            ).catch(error => console.log('error', error));
     }
-    
+
 
     displayTableOfStream = () => {
         const { streamTableData } = this.state;
@@ -119,7 +129,7 @@ export class Dashboard extends React.Component<any, any> {
                             <tr>
                                 <td>
                                     <p>{rowData.description}</p>
-                                    <p>{rowData.rules}&nbsp;&nbsp; 
+                                    <p>{rowData.rules}&nbsp;&nbsp;
                                     {/* <a href="#">{rowData.descriptionLink}</a> */}
                                     </p>
                                 </td>
@@ -155,14 +165,67 @@ export class Dashboard extends React.Component<any, any> {
         }
         return retData;
     }
-
+    displayTableOfTcpInputs = () => {
+        console.log("tcp state  inputs ::: ",this.state.tcpInputs);
+        const { tcpInputs } = this.state;
+        let retData = [];
+        for (let i = 0; i < tcpInputs.length; i++) {
+            let rowData = tcpInputs[i];
+            console.log("row :: ",rowData);
+            retData.push(
+                <tr>
+                    <td>
+                        <h4 onClick={this.OpenAllEventsPopup}>{rowData.title}</h4>
+                        <span>Name: &nbsp;&nbsp;{rowData["name"]}</span>
+                    </td>
+                    <td>
+                        <table className="inner-table">
+                            <tr>
+                                <td>
+                                    <p>{rowData.content_pack}</p>
+                                    <p>{rowData.created_at}&nbsp;&nbsp;
+                                    {/* <a href="#">{rowData.descriptionLink}</a> */}
+                                    </p>
+                                </td>
+                                <td>
+                                    <div className="d-inline-block">
+                                        <button className="blue-button m-b-0" onClick={this.openNewStreamPopup}>Manage Rules</button>
+                                        <button className="blue-button m-b-0" onClick={this.OpenManageOutputPopup}>Manage Output</button>
+                                        <button className="blue-button m-b-0">Manage Alerts</button>
+                                    </div>
+                                    <div className="d-inline-block table-btns">
+                                        <div className="d-inline-block enabled-disabled-container">
+                                            <div className="enabled"></div>
+                                        </div>
+                                        <button className="btn btn-link"><i className="fa fa-edit"></i></button>
+                                        <button className="btn btn-link"><i className="fa fa-trash"></i></button>
+                                        <button className="btn btn-link" onClick={() => this.onClickOpenSubLink(i)}><i className="fa fa-ellipsis-h"></i></button>
+                                        {rowData.actionStatus == true && <div className="text-center open-create-menu">
+                                            <a href="#">Manage Rules</a>
+                                            <a href="#">MAnage Outputs</a>
+                                            <a href="#">MAnage Alerts</a>
+                                            <a href="#">Edit Stream</a>
+                                            <a href="#">Quick Add Rule</a>
+                                            <a href="#">Clone this Stream</a>
+                                        </div>
+                                        }
+                                    </div>
+                                </td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+            );
+        }
+        return retData;
+    }
     render() {
         const { openCreateMenu } = this.state;
         return (
             <div className="logmanager-dashboard-container">
                 <Breadcrumbs breadcrumbs={this.breadCrumbs} pageTitle="LOG MANAGMENT" />
                 <div className="logmanager-page-container">
-                   <TopMenu/>
+                    <TopMenu />
                     <div className="common-container">
                         <div className="streams-text">
                             <h3>STREAMS</h3>
@@ -190,6 +253,15 @@ export class Dashboard extends React.Component<any, any> {
                                 <table className="table">
                                     <tbody>
                                         {this.displayTableOfStream()}
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <div className="table-container">
+                            <div className="table-container-inner">
+                                <table className="table">
+                                    <tbody>
+                                        {this.displayTableOfTcpInputs()}
                                     </tbody>
                                 </table>
                             </div>

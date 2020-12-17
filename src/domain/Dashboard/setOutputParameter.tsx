@@ -1,8 +1,6 @@
 import { Checkbox } from '@material-ui/core';
 import * as React from 'react';
 import { Modal, ModalBody, ModalHeader } from 'reactstrap';
-
-
 export class SetOutputPopup extends React.Component<any, any> {
     steps: any;
     constructor(props: any) {
@@ -11,7 +9,6 @@ export class SetOutputPopup extends React.Component<any, any> {
             modal: false,
         };
     }
-
     toggle = () => {
         this.setState({
             modal: !this.state.modal,

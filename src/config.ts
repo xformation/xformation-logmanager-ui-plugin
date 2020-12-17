@@ -6,5 +6,6 @@ const logMrgSrvUrl = `http://${IP}:9000/api`;
 
 export const config = {
   basePath: "/plugins/xformation-logmanager-ui-plugin/page",
-  STREAM: logMrgSrvUrl + `/streams`
+  STREAM: logMrgSrvUrl + `/streams`,
+  TCP_INPUT_STREAM: logMrgSrvUrl + `/system/inputs`
 };

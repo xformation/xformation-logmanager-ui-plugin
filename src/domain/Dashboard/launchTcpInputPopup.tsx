@@ -11,7 +11,7 @@ export class LaunchTcpInputPopup extends React.Component<any, any> {
             isSubmitted: false,
             removeMatches: false,
             global: false,
-            node: "",
+            node: "bfae0af3-0a33-4df4-bad1-8c5e952ed6a4",
             title: "",
             bindAddress: "0.0.0.0",
             port: 5044,
@@ -25,6 +25,11 @@ export class LaunchTcpInputPopup extends React.Component<any, any> {
             tlsClientAuthTrustedCerts: "",
             tcpKeepAlive: false,
             overrideSource: "",
+            nullFrameDelimiter: false,
+            forceRDns: false,
+            allowOverridingDate: true,
+            storeFullMessage: false,
+            expandStructuredData: false
 
 
 
@@ -65,14 +70,40 @@ export class LaunchTcpInputPopup extends React.Component<any, any> {
         });
         const errorData = this.validate(true);
         if (errorData?.title.isValid) {
-            const {  global, node, title, bindAddress, port, reciveBufferSize, noOfWorkerthreads, tlsCertFile, tlsPrivateKeyFile, enableTls, tlsKeyPassword, tlsClientAuthentication, tlsClientAuthTrustedCerts, tcpKeepAlive, overrideSource } = this.state;
+            const { global, node, title, bindAddress, port, reciveBufferSize, noOfWorkerthreads, tlsCertFile, tlsPrivateKeyFile, enableTls, tlsKeyPassword, tlsClientAuthentication, tlsClientAuthTrustedCerts, tcpKeepAlive, nullFrameDelimiter, overrideSource, forceRDns, allowOverridingDate, storeFullMessage, expandStructuredData } = this.state;
             var myHeaders = new Headers();
             myHeaders.append("X-Requested-By", "XMLHttpRequest");
             myHeaders.append("Authorization", "Basic YWRtaW46YWRtaW4=");
             myHeaders.append("Content-Type", "application/json");
             // myHeaders.append("Access-Control-Allow-Origin", "*");
-
-            var raw = JSON.stringify({ "global-checkbox":global,"configuration[title]": title,"node-select":node });
+            var configurations = {
+                "bind_address": bindAddress,
+                "port": port,
+                "recv_buffer_size": reciveBufferSize,
+                "number_worker_threads": noOfWorkerthreads,
+                "tls_cert_file": tlsCertFile,
+                "tls_key_file": tlsPrivateKeyFile,
+                "tls_enable": enableTls,
+                "tls_key_password": tlsKeyPassword,
+                "tls_client_auth": tlsClientAuthentication,
+                "tls_client_auth_cert_file": tlsClientAuthTrustedCerts,
+                "tcp_keepalive": tcpKeepAlive,
+                "use_null_delimiter": nullFrameDelimiter,
+                "max_message_size": 2097152,
+                "override_source": overrideSource,
+                "force_rdns": forceRDns,
+                "allow_override_date": allowOverridingDate,
+                "store_full_message": storeFullMessage,
+                "expand_structured_data": expandStructuredData
+            };
+            var data = {
+                "title": title,
+                "type": "org.graylog2.inputs.syslog.tcp.SyslogTCPInput",
+                "global": global,
+                "configuration": configurations,
+                "node": "bfae0af3-0a33-4df4-bad1-8c5e952ed6a4"
+            };
+            var raw = JSON.stringify(data);
             console.log("Data : ", raw)
             var requestOptions: RequestInit = {
                 method: 'POST',
@@ -81,7 +112,7 @@ export class LaunchTcpInputPopup extends React.Component<any, any> {
                 redirect: 'follow'
             };
 
-            fetch(config.STREAM, requestOptions)
+            fetch(config.TCP_INPUT_STREAM, requestOptions)
                 .then(response => response.text())
                 .then(result => console.log(result))
                 .catch(error => console.log('error', error));
@@ -119,7 +150,7 @@ export class LaunchTcpInputPopup extends React.Component<any, any> {
     }
 
     render() {
-        const { modal, isSubmitted, global, node, title, bindAddress, port, reciveBufferSize, noOfWorkerthreads, tlsCertFile, tlsPrivateKeyFile, enableTls, tlsKeyPassword, tlsClientAuthentication, tlsClientAuthTrustedCerts, tcpKeepAlive, overrideSource } = this.state;
+        const { modal, isSubmitted, global, node, title, bindAddress, port, reciveBufferSize, noOfWorkerthreads, tlsCertFile, tlsPrivateKeyFile, enableTls, tlsKeyPassword, tlsClientAuthentication, tlsClientAuthTrustedCerts, tcpKeepAlive, nullFrameDelimiter, overrideSource, forceRDns, allowOverridingDate, storeFullMessage, expandStructuredData } = this.state;
         const errorData = this.validate(isSubmitted);
         const state = this.state;
         return (
@@ -267,9 +298,49 @@ export class LaunchTcpInputPopup extends React.Component<any, any> {
                         <div className="row">
                             <div className="col-lg-12 col-md-12 col-sm-12">
                                 <div className="form-group">
+                                    <input type="checkbox" name="nullFramedelimiter" onChange={this.checkboxChange} value={nullFrameDelimiter} id="nullFramedelimiter" /> &nbsp;Null frame delimiter?
+                                    <span>Use null byte as frame delimiter? Otherwise newline delimiter is used.</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div className="row">
+                            <div className="col-lg-12 col-md-12 col-sm-12">
+                                <div className="form-group">
                                     <label htmlFor="title"> Override Source  &nbsp;<sub>(optional)</sub></label>
                                     <input type="text" id="overrideSource" name="overrideSource" value={overrideSource} onChange={this.onStateChange} className="input-group-text" placeholder="A description name of stream" />
                                     <span>TLS Client Auth Trusted Certs (File or Directory).</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div className="row">
+                            <div className="col-lg-12 col-md-12 col-sm-12">
+                                <div className="form-group">
+                                    <input type="checkbox" name="forceRDns" onChange={this.checkboxChange} value={forceRDns} id="forceRDns" /> &nbsp;Force rDNS?
+                                    <span>Force rDNS resolution of hostname? Use if hostname cannot be parsed. (Be careful if you are sending DNS logs into this input because it can cause a feedback loop.).</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div className="row">
+                            <div className="col-lg-12 col-md-12 col-sm-12">
+                                <div className="form-group">
+                                    <input type="checkbox" name="allowOverridingDate" onChange={this.checkboxChange} value={allowOverridingDate} id="allowOverridingDate" /> &nbsp;Allow overriding date?
+                                    <span>Allow to override with current date if date could not be parsed?.</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div className="row">
+                            <div className="col-lg-12 col-md-12 col-sm-12">
+                                <div className="form-group">
+                                    <input type="checkbox" name="storeFullMessage" onChange={this.checkboxChange} value={storeFullMessage} id="storeFullMessage" /> &nbsp;Store full message?
+                                    <span>Store the full original syslog message as full_message?</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div className="row">
+                            <div className="col-lg-12 col-md-12 col-sm-12">
+                                <div className="form-group">
+                                    <input type="checkbox" name="expandStructuredData" onChange={this.checkboxChange} value={expandStructuredData} id="expandStructuredData" /> &nbsp;Expand structured data?
+                                    <span>Expand structured data elements by prefixing attributes with their SD-ID?</span>
                                 </div>
                             </div>
                         </div>
