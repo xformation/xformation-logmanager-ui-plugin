@@ -2,11 +2,15 @@ import { Checkbox } from '@material-ui/core';
 import * as React from 'react';
 import { Modal, ModalBody, ModalHeader } from 'reactstrap';
 import { config } from '../../config';
+import AlertMessage from './../../components/AlertMessage';
 export class LaunchTcpInputPopup extends React.Component<any, any> {
     steps: any;
     constructor(props: any) {
         super(props);
         this.state = {
+            isAlertOpen: false,
+            message: null,
+            severity: null,
             modal: false,
             isSubmitted: false,
             removeMatches: false,
@@ -30,14 +34,9 @@ export class LaunchTcpInputPopup extends React.Component<any, any> {
             allowOverridingDate: true,
             storeFullMessage: false,
             expandStructuredData: false
-
-
-
-
-
-
         };
     }
+
     onStateChange = (e: any) => {
         const { name, value } = e.target;
         this.setState({
@@ -114,8 +113,30 @@ export class LaunchTcpInputPopup extends React.Component<any, any> {
 
             fetch(config.TCP_INPUT_STREAM, requestOptions)
                 .then(response => response.text())
-                .then(result => console.log(result))
-                .catch(error => console.log('error', error));
+                .then(result => {
+                    console.log("result :" ,result);
+                    if (result != null) {
+                        this.setState({
+                            severity: config.SEVERITY_SUCCESS,
+                            message: config.TCP_INPUT_ADDED_SUCESS,
+                            isAlertOpen: true,
+                        });
+                    } else {
+                        this.setState({
+                            severity: config.SEVERITY_ERROR,
+                            message: config.TCP_INPUT_ADDED_ERROR,
+                            isAlertOpen: true,
+                        });
+                    }
+                })
+                .catch(error => {
+                    this.setState({
+                        severity: config.SEVERITY_ERROR,
+                        message: config.TCP_INPUT_ADDED_ERROR,
+                        isAlertOpen: true,
+                    });
+                    console.log('error', error)
+                });
         }
 
     }
@@ -148,6 +169,11 @@ export class LaunchTcpInputPopup extends React.Component<any, any> {
         }
 
     }
+    handleCloseAlert = (e: any) => {
+        this.setState({
+            isAlertOpen: false,
+        })
+    }
 
     render() {
         const { modal, isSubmitted, global, node, title, bindAddress, port, reciveBufferSize, noOfWorkerthreads, tlsCertFile, tlsPrivateKeyFile, enableTls, tlsKeyPassword, tlsClientAuthentication, tlsClientAuthTrustedCerts, tcpKeepAlive, nullFrameDelimiter, overrideSource, forceRDns, allowOverridingDate, storeFullMessage, expandStructuredData } = this.state;
@@ -155,6 +181,7 @@ export class LaunchTcpInputPopup extends React.Component<any, any> {
         const state = this.state;
         return (
             <Modal isOpen={modal} toggle={this.toggle} className="modal-container logmanager-modal-container">
+                <AlertMessage handleCloseAlert={this.handleCloseAlert} open={state.isAlertOpen} severity={state.severity} msg={state.message}></AlertMessage>
                 <ModalHeader toggle={this.toggle}>Launch new Beats (deprecated) input</ModalHeader>
                 <ModalBody style={{ height: 'calc(60vh - 50px)', overflowY: 'auto', overflowX: "hidden" }}>
                     <div className="d-block width-100 stream-popup-container">

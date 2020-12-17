@@ -7,5 +7,10 @@ const logMrgSrvUrl = `http://${IP}:9000/api`;
 export const config = {
   basePath: "/plugins/xformation-logmanager-ui-plugin/page",
   STREAM: logMrgSrvUrl + `/streams`,
-  TCP_INPUT_STREAM: logMrgSrvUrl + `/system/inputs`
+  TCP_INPUT_STREAM: logMrgSrvUrl + `/system/inputs`,
+
+  SEVERITY_SUCCESS: "success",
+  SEVERITY_ERROR: "error",
+  TCP_INPUT_ADDED_SUCESS: "TCP INPUT SAVED",
+  TCP_INPUT_ADDED_ERROR: "TCP Input can't added"
 };

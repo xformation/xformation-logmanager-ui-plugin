@@ -2,13 +2,16 @@ import { Checkbox } from '@material-ui/core';
 import * as React from 'react';
 import { Modal, ModalBody, ModalHeader } from 'reactstrap';
 import { config } from '../../config';
-
+import AlertMessage from './../../components/AlertMessage';
 
 export class CreateStreamPopup extends React.Component<any, any> {
     steps: any;
     constructor(props: any) {
         super(props);
         this.state = {
+            isAlertOpen: false,
+            message: null,
+            severity: null,
             modal: false,
             title: "",
             description: "",
@@ -23,16 +26,16 @@ export class CreateStreamPopup extends React.Component<any, any> {
             [name]: value
         })
     }
-    removeMatchesCheckboxChange=(e:any)=>{
+    removeMatchesCheckboxChange = (e: any) => {
         let isState = e.target.checked;
-        console.log("state : ",isState)
-        if(isState){
-            this.setState({removeMatches: true})
-        }else{
-            this.setState({removeMatches: false})
+        console.log("state : ", isState)
+        if (isState) {
+            this.setState({ removeMatches: true })
+        } else {
+            this.setState({ removeMatches: false })
         }
-       
-          
+
+
     }
     toggle = () => {
         this.setState({
@@ -51,7 +54,7 @@ export class CreateStreamPopup extends React.Component<any, any> {
         });
         const errorData = this.validate(true);
         if (errorData?.title.isValid && errorData.description.isValid && errorData.indexSet.isValid) {
-            const { title, description, indexSet,removeMatches } = this.state;
+            const { title, description, indexSet, removeMatches } = this.state;
             var myHeaders = new Headers();
             myHeaders.append("X-Requested-By", "XMLHttpRequest");
             myHeaders.append("Authorization", "Basic YWRtaW46YWRtaW4=");
@@ -59,7 +62,7 @@ export class CreateStreamPopup extends React.Component<any, any> {
             // myHeaders.append("Access-Control-Allow-Origin", "*");
 
             var raw = JSON.stringify({ "title": title, "description": description, "index_set_id": indexSet, "remove_matches_from_default_stream": removeMatches });
-            console.log("Data : ",raw)
+            console.log("Data : ", raw)
             var requestOptions: RequestInit = {
                 method: 'POST',
                 headers: myHeaders,
@@ -69,8 +72,30 @@ export class CreateStreamPopup extends React.Component<any, any> {
 
             fetch(config.STREAM, requestOptions)
                 .then(response => response.text())
-                .then(result => console.log(result))
-                .catch(error => console.log('error', error));
+                .then(result => {
+                    console.log("result :", result);
+                    if (result != null) {
+                        this.setState({
+                            severity: config.SEVERITY_SUCCESS,
+                            message: config.TCP_INPUT_ADDED_SUCESS,
+                            isAlertOpen: true,
+                        });
+                    } else {
+                        this.setState({
+                            severity: config.SEVERITY_ERROR,
+                            message: config.TCP_INPUT_ADDED_ERROR,
+                            isAlertOpen: true,
+                        });
+                    }
+                })
+                .catch(error => {
+                    this.setState({
+                        severity: config.SEVERITY_ERROR,
+                        message: config.TCP_INPUT_ADDED_ERROR,
+                        isAlertOpen: true,
+                    });
+                    console.log('error', error)
+                });
         }
 
     }
@@ -108,13 +133,18 @@ export class CreateStreamPopup extends React.Component<any, any> {
         }
 
     }
-
+    handleCloseAlert = (e: any) => {
+        this.setState({
+            isAlertOpen: false,
+        })
+    }
     render() {
         const { modal, title, description, indexSet, isSubmitted, removeMatches } = this.state;
         const errorData = this.validate(isSubmitted);
         const state = this.state;
         return (
             <Modal isOpen={modal} toggle={this.toggle} className="modal-container logmanager-modal-container">
+                <AlertMessage handleCloseAlert={this.handleCloseAlert} open={state.isAlertOpen} severity={state.severity} msg={state.message}></AlertMessage>
                 <ModalHeader toggle={this.toggle}>Creating Stream</ModalHeader>
                 <ModalBody style={{ height: 'calc(60vh - 50px)', overflowY: 'auto', overflowX: "hidden" }}>
                     <div className="d-block width-100 stream-popup-container">
@@ -154,7 +184,7 @@ export class CreateStreamPopup extends React.Component<any, any> {
                         <div className="row">
                             <div className="col-lg-12 col-md-12 col-sm-12">
                                 <div className="form-check">
-                                    <input type="checkbox" name="removeMatches"  onChange={this.removeMatchesCheckboxChange}   className="form-check-input" id="RemoveMessages" />
+                                    <input type="checkbox" name="removeMatches" onChange={this.removeMatchesCheckboxChange} className="form-check-input" id="RemoveMessages" />
                                     <label className="form-check-label" htmlFor="RemoveMessages">Remove Matches from "All messages" Stream</label>
                                 </div>
                             </div>
