@@ -173,6 +173,7 @@ export class Dashboard extends React.Component<any, any> {
             let rowData = tcpInputs[i];
             console.log("row :: ",rowData);
             retData.push(
+                
                 <tr>
                     <td>
                         <h4 onClick={this.OpenAllEventsPopup}>{rowData.title}</h4>
