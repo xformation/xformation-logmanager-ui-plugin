@@ -57,13 +57,15 @@ export class CreateStreamPopup extends React.Component<any, any> {
             const { title, description, indexSet, removeMatches } = this.state;
             var myHeaders = new Headers();
             myHeaders.append("X-Requested-By", "XMLHttpRequest");
-           /** for local **/
+            /** for local **/
             // myHeaders.append("Authorization", "Basic YWRtaW46YWRtaW4=");
             /** for local **/
 
             /** for 25 box **/
             myHeaders.append("Authorization", "Basic YWRtaW46cGFzc3dvcmQ=");
             /** for 25 box **/
+            myHeaders.append("Content-Type", "application/json");
+            // myHeaders.append("Access-Control-Allow-Origin", "*");
             myHeaders.append("Content-Type", "application/json");
             // myHeaders.append("Access-Control-Allow-Origin", "*");
 
@@ -178,9 +180,14 @@ export class CreateStreamPopup extends React.Component<any, any> {
                                     <label htmlFor="index">IndexSet</label>
                                     <select className="input-group-text" name="indexSet" value={indexSet} onChange={this.onStateChange}>
                                         <option>Select index set</option>
-                                        <option value="5fb950ef6439c846ee76f455">Default index set</option>
+                                        {/* for local */}
+                                        {/* <option value="5fb950ef6439c846ee76f455">Default index set</option>
                                         <option value="5fb95bb004a35d1e34e9baa6">GrayLog Events</option>
-                                        <option value="5fb95bb004a35d1e34e9baa8">GrayLog System Event</option>
+                                        <option value="5fb95bb004a35d1e34e9baa8">GrayLog System Event</option> */}
+                                        {/* for server */}
+                                        <option value="5fd8a53dcf9fac75f019966e">Default index set</option>
+                                        <option value="5fd8a53fcf9fac75f0199724">GrayLog Events</option>
+                                        <option value="5fd8a53fcf9fac75f0199727">GrayLog System Event</option>
                                     </select>
                                     <span style={{ color: "red" }}>{errorData?.indexSet.message}</span>
                                     <span>messages that match this stream will be Written to the configured index set</span>
