@@ -208,7 +208,10 @@ export class LaunchTcpInputPopup extends React.Component<any, any> {
                                         <label htmlFor="description">Node</label>
                                         <select className="input-group-text" name="node" value={node} onChange={this.onStateChange}>
                                             <option>Select Node</option>
-                                            <option value="bfae0af3-0a33-4df4-bad1-8c5e952ed6a4">bfae0af3 / DESKTOP-FFBF9FD.localdomain</option>
+                                            {/* for local */}
+                                            {/* <option value="bfae0af3-0a33-4df4-bad1-8c5e952ed6a4">bfae0af3 / DESKTOP-FFBF9FD.localdomain</option> */}
+                                            {/* for server */}
+                                            <option value="ccc3cc82-fb28-418f-b19c-bea00c8b6638">ccc3cc82 / vditest</option>
                                         </select>
                                         <span style={{ color: "red" }}>{errorData?.node.message}</span>
                                     </div>
