@@ -72,7 +72,13 @@ export class LaunchTcpInputPopup extends React.Component<any, any> {
             const { global, node, title, bindAddress, port, reciveBufferSize, noOfWorkerthreads, tlsCertFile, tlsPrivateKeyFile, enableTls, tlsKeyPassword, tlsClientAuthentication, tlsClientAuthTrustedCerts, tcpKeepAlive, nullFrameDelimiter, overrideSource, forceRDns, allowOverridingDate, storeFullMessage, expandStructuredData } = this.state;
             var myHeaders = new Headers();
             myHeaders.append("X-Requested-By", "XMLHttpRequest");
-            myHeaders.append("Authorization", "Basic YWRtaW46YWRtaW4=");
+            /** for local **/
+            // myHeaders.append("Authorization", "Basic YWRtaW46YWRtaW4=");
+            /** for local **/
+
+            /** for 25 box **/
+            myHeaders.append("Authorization", "Basic YWRtaW46cGFzc3dvcmQ=");
+            /** for 25 box **/
             myHeaders.append("Content-Type", "application/json");
             // myHeaders.append("Access-Control-Allow-Origin", "*");
             var configurations = {
@@ -114,7 +120,7 @@ export class LaunchTcpInputPopup extends React.Component<any, any> {
             fetch(config.TCP_INPUT_STREAM, requestOptions)
                 .then(response => response.text())
                 .then(result => {
-                    console.log("result :" ,result);
+                    console.log("result :", result);
                     if (result != null) {
                         this.setState({
                             severity: config.SEVERITY_SUCCESS,

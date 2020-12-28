@@ -57,7 +57,13 @@ export class CreateStreamPopup extends React.Component<any, any> {
             const { title, description, indexSet, removeMatches } = this.state;
             var myHeaders = new Headers();
             myHeaders.append("X-Requested-By", "XMLHttpRequest");
-            myHeaders.append("Authorization", "Basic YWRtaW46YWRtaW4=");
+           /** for local **/
+            // myHeaders.append("Authorization", "Basic YWRtaW46YWRtaW4=");
+            /** for local **/
+
+            /** for 25 box **/
+            myHeaders.append("Authorization", "Basic YWRtaW46cGFzc3dvcmQ=");
+            /** for 25 box **/
             myHeaders.append("Content-Type", "application/json");
             // myHeaders.append("Access-Control-Allow-Origin", "*");
 
@@ -77,13 +83,13 @@ export class CreateStreamPopup extends React.Component<any, any> {
                     if (result != null) {
                         this.setState({
                             severity: config.SEVERITY_SUCCESS,
-                            message: config.TCP_INPUT_ADDED_SUCESS,
+                            message: config.STREAM_CREATED_SUCESS,
                             isAlertOpen: true,
                         });
                     } else {
                         this.setState({
                             severity: config.SEVERITY_ERROR,
-                            message: config.TCP_INPUT_ADDED_ERROR,
+                            message: config.STREAM_CREATED_ERROR,
                             isAlertOpen: true,
                         });
                     }
@@ -91,7 +97,7 @@ export class CreateStreamPopup extends React.Component<any, any> {
                 .catch(error => {
                     this.setState({
                         severity: config.SEVERITY_ERROR,
-                        message: config.TCP_INPUT_ADDED_ERROR,
+                        message: config.STREAM_CREATED_ERROR,
                         isAlertOpen: true,
                     });
                     console.log('error', error)
