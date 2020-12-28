@@ -66,8 +66,6 @@ export class CreateStreamPopup extends React.Component<any, any> {
             /** for 25 box **/
             myHeaders.append("Content-Type", "application/json");
             // myHeaders.append("Access-Control-Allow-Origin", "*");
-            myHeaders.append("Content-Type", "application/json");
-            // myHeaders.append("Access-Control-Allow-Origin", "*");
 
             var raw = JSON.stringify({ "title": title, "description": description, "index_set_id": indexSet, "remove_matches_from_default_stream": removeMatches });
             console.log("Data : ", raw)
