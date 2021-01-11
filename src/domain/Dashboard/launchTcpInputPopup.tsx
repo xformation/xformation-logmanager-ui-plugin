@@ -2,7 +2,9 @@ import { Checkbox } from '@material-ui/core';
 import * as React from 'react';
 import { Modal, ModalBody, ModalHeader } from 'reactstrap';
 import { config } from '../../config';
+import { CommonService } from '../_common/common';
 import AlertMessage from './../../components/AlertMessage';
+let nodeIdMap = new Map();
 export class LaunchTcpInputPopup extends React.Component<any, any> {
     steps: any;
     constructor(props: any) {
@@ -15,7 +17,7 @@ export class LaunchTcpInputPopup extends React.Component<any, any> {
             isSubmitted: false,
             removeMatches: false,
             global: false,
-            node: "bfae0af3-0a33-4df4-bad1-8c5e952ed6a4",
+            node: "",
             title: "",
             bindAddress: "0.0.0.0",
             port: 5044,
@@ -36,7 +38,32 @@ export class LaunchTcpInputPopup extends React.Component<any, any> {
             expandStructuredData: false
         };
     }
+    async componentDidMount() {
+        this.getAllNodesInCluster();
+    }
 
+    getAllNodesInCluster = async () => {
+        var requestOptions = await CommonService.requestOptionsForGetRequest();
+        await fetch(config.GET_ALL_NODES_IN_CLUSTER, requestOptions)
+            .then(response => response.text())
+            .then(result => {
+                var clusterNodes = JSON.parse(result);
+                console.log("cluster nodes ::  : ", clusterNodes);
+                for (let node in clusterNodes) {
+                    var uiNameForNode = node.split("-")[0] + " / " + clusterNodes[node].hostname;
+                    nodeIdMap.set(node, uiNameForNode);
+                }
+                console.log("node id map :: ", nodeIdMap)
+            }
+            ).catch(error => console.log('error', error));
+    }
+    createNodeOptions = () => {
+        let retData: any = [];
+        nodeIdMap.forEach((value: any, key: any) => {
+            retData.push(<option value={key}>{nodeIdMap.get(key)}</option>);
+        })
+        return retData;
+    }
     onStateChange = (e: any) => {
         const { name, value } = e.target;
         this.setState({
@@ -70,17 +97,6 @@ export class LaunchTcpInputPopup extends React.Component<any, any> {
         const errorData = this.validate(true);
         if (errorData?.title.isValid) {
             const { global, node, title, bindAddress, port, reciveBufferSize, noOfWorkerthreads, tlsCertFile, tlsPrivateKeyFile, enableTls, tlsKeyPassword, tlsClientAuthentication, tlsClientAuthTrustedCerts, tcpKeepAlive, nullFrameDelimiter, overrideSource, forceRDns, allowOverridingDate, storeFullMessage, expandStructuredData } = this.state;
-            var myHeaders = new Headers();
-            myHeaders.append("X-Requested-By", "XMLHttpRequest");
-            /** for local **/
-            // myHeaders.append("Authorization", "Basic YWRtaW46YWRtaW4=");
-            /** for local **/
-
-            /** for 25 box **/
-            myHeaders.append("Authorization", "Basic YWRtaW46cGFzc3dvcmQ=");
-            /** for 25 box **/
-            myHeaders.append("Content-Type", "application/json");
-            // myHeaders.append("Access-Control-Allow-Origin", "*");
             var configurations = {
                 "bind_address": bindAddress,
                 "port": port,
@@ -106,17 +122,12 @@ export class LaunchTcpInputPopup extends React.Component<any, any> {
                 "type": "org.graylog2.inputs.syslog.tcp.SyslogTCPInput",
                 "global": global,
                 "configuration": configurations,
-                "node": "bfae0af3-0a33-4df4-bad1-8c5e952ed6a4"
+                "node": node,
             };
             var raw = JSON.stringify(data);
-            console.log("Data : ", raw)
-            var requestOptions: RequestInit = {
-                method: 'POST',
-                headers: myHeaders,
-                body: raw,
-                redirect: 'follow'
-            };
 
+            console.log("Data : ", raw)
+            var requestOptions=CommonService.requestOptionsForPostRequest(raw);
             fetch(config.TCP_INPUT_STREAM, requestOptions)
                 .then(response => response.text())
                 .then(result => {
@@ -208,10 +219,7 @@ export class LaunchTcpInputPopup extends React.Component<any, any> {
                                         <label htmlFor="description">Node</label>
                                         <select className="input-group-text" name="node" value={node} onChange={this.onStateChange}>
                                             <option>Select Node</option>
-                                            {/* for local */}
-                                            {/* <option value="bfae0af3-0a33-4df4-bad1-8c5e952ed6a4">bfae0af3 / DESKTOP-FFBF9FD.localdomain</option> */}
-                                            {/* for server */}
-                                            <option value="ccc3cc82-fb28-418f-b19c-bea00c8b6638">ccc3cc82 / vditest</option>
+                                            {this.createNodeOptions()}
                                         </select>
                                         <span style={{ color: "red" }}>{errorData?.node.message}</span>
                                     </div>

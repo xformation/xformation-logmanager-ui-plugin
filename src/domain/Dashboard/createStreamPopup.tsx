@@ -2,8 +2,9 @@ import { Checkbox } from '@material-ui/core';
 import * as React from 'react';
 import { Modal, ModalBody, ModalHeader } from 'reactstrap';
 import { config } from '../../config';
+import { CommonService } from '../_common/common'
 import AlertMessage from './../../components/AlertMessage';
-
+let indexSetMap = new Map();
 export class CreateStreamPopup extends React.Component<any, any> {
     steps: any;
     constructor(props: any) {
@@ -19,6 +20,32 @@ export class CreateStreamPopup extends React.Component<any, any> {
             isSubmitted: false,
             removeMatches: false,
         };
+    }
+    async componentDidMount() {
+        this.getIndexSets();
+    }
+    getIndexSets = async () => {
+        var requestOptions = await CommonService.requestOptionsForGetRequest();
+        await fetch(config.GET_INDEX_SETS, requestOptions)
+            .then(response => response.text())
+            .then(result => {
+                var indexSets = JSON.parse(result).index_sets;
+                console.log("index Sets : ", indexSets);
+                indexSets.forEach((element: any) => {
+                    indexSetMap.set(element.id, element.title);
+                });
+                this.setState({
+                    indexSets: indexSets,
+                });
+            }
+            ).catch(error => console.log('error', error));
+    }
+    createIndexSetOptions = () => {
+        let retData:any=[];
+        indexSetMap.forEach((value: any, key: any) => {
+            retData.push(<option value={key}>{indexSetMap.get(key)}</option>);
+        })
+        return retData;
     }
     onStateChange = (e: any) => {
         const { name, value } = e.target;
@@ -55,27 +82,10 @@ export class CreateStreamPopup extends React.Component<any, any> {
         const errorData = this.validate(true);
         if (errorData?.title.isValid && errorData.description.isValid && errorData.indexSet.isValid) {
             const { title, description, indexSet, removeMatches } = this.state;
-            var myHeaders = new Headers();
-            myHeaders.append("X-Requested-By", "XMLHttpRequest");
-            /** for local **/
-            // myHeaders.append("Authorization", "Basic YWRtaW46YWRtaW4=");
-            /** for local **/
-
-            /** for 25 box **/
-            myHeaders.append("Authorization", "Basic YWRtaW46cGFzc3dvcmQ=");
-            /** for 25 box **/
-            myHeaders.append("Content-Type", "application/json");
-            // myHeaders.append("Access-Control-Allow-Origin", "*");
 
             var raw = JSON.stringify({ "title": title, "description": description, "index_set_id": indexSet, "remove_matches_from_default_stream": removeMatches });
             console.log("Data : ", raw)
-            var requestOptions: RequestInit = {
-                method: 'POST',
-                headers: myHeaders,
-                body: raw,
-                redirect: 'follow'
-            };
-
+            var requestOptions= CommonService.requestOptionsForPostRequest(raw);
             fetch(config.STREAM, requestOptions)
                 .then(response => response.text())
                 .then(result => {
@@ -183,9 +193,10 @@ export class CreateStreamPopup extends React.Component<any, any> {
                                         <option value="5fb95bb004a35d1e34e9baa6">GrayLog Events</option>
                                         <option value="5fb95bb004a35d1e34e9baa8">GrayLog System Event</option> */}
                                         {/* for server */}
-                                        <option value="5fd8a53dcf9fac75f019966e">Default index set</option>
+                                        {/* <option value="5fd8a53dcf9fac75f019966e">Default index set</option>
                                         <option value="5fd8a53fcf9fac75f0199724">GrayLog Events</option>
-                                        <option value="5fd8a53fcf9fac75f0199727">GrayLog System Event</option>
+                                        <option value="5fd8a53fcf9fac75f0199727">GrayLog System Event</option> */}
+                                        {this.createIndexSetOptions()}
                                     </select>
                                     <span style={{ color: "red" }}>{errorData?.indexSet.message}</span>
                                     <span>messages that match this stream will be Written to the configured index set</span>

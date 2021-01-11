@@ -1,12 +1,16 @@
 import * as React from 'react';
 import { Link } from 'react-router-dom';
 import { config } from '../../config';
+import { CommonService } from '../_common/common'
 import { Breadcrumbs } from '../Breadcrumbs';
 import { CreateStreamPopup } from './createStreamPopup';
 import { NewStreamRulePopup } from './newStreamRulePopup';
 import { SetOutputPopup } from './setOutputParameter';
 import { AllEventsPopup } from './allEventPopup';
 import { TopMenu } from './topMenu';
+import { JsxEmit } from 'typescript';
+import { Button, Table } from 'react-bootstrap';
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 class StreamData {
     id: any;
@@ -17,9 +21,9 @@ class StreamData {
 
 }
 let indexSetMap = new Map();
-indexSetMap.set("5fb950ef6439c846ee76f455", "Default index set");
-indexSetMap.set("5fb95bb004a35d1e34e9baa6", "GrayLog Events");
-indexSetMap.set("5fb95bb004a35d1e34e9baa8", "GrayLog System Event");
+// indexSetMap.set("5fb950ef6439c846ee76f455", "Default index set");
+// indexSetMap.set("5fb95bb004a35d1e34e9baa6", "GrayLog Events");
+// indexSetMap.set("5fb95bb004a35d1e34e9baa8", "GrayLog System Event");
 export class Dashboard extends React.Component<any, any> {
     breadCrumbs: any;
     createStreamRef: any;
@@ -31,7 +35,8 @@ export class Dashboard extends React.Component<any, any> {
         this.state = {
             tcpInputs: [],
             openCreateMenu: false,
-            streamTableData: []
+            streamTableData: [],
+            indexSets: [],
         }
         this.breadCrumbs = [
             {
@@ -75,37 +80,43 @@ export class Dashboard extends React.Component<any, any> {
     }
     async componentDidMount() {
         console.log("componentDidMountMethod called");
-        var myHeaders = new Headers();
-        myHeaders.append("X-Requested-By", "XMLHttpRequest");
-        /** for local **/
-        // myHeaders.append("Authorization", "Basic YWRtaW46YWRtaW4=");
-        /** for local **/
+        this.getIndexSets()
+        this.getStreams();
+        this.getTcpInputStream();
 
-        /** for 25 box **/
-        myHeaders.append("Authorization", "Basic YWRtaW46cGFzc3dvcmQ=");
-        /** for 25 box **/
-        myHeaders.append("Content-Type", "application/json");
-        var requestOptions: RequestInit = {
-            method: 'GET',
-            headers: myHeaders,
-            redirect: 'follow'
-        };
-
+    }
+    getIndexSets = async () => {
+        var requestOptions = await CommonService.requestOptionsForGetRequest();
+        await fetch(config.GET_INDEX_SETS, requestOptions)
+            .then(response => response.text())
+            .then(result => {
+                var indexSets = JSON.parse(result).index_sets;
+                indexSets.forEach((element: any) => {
+                    indexSetMap.set(element.id, element.title);
+                });
+                this.setState({
+                    indexSets: indexSets,
+                });
+            }
+            ).catch(error => console.log('error', error));
+    }
+    getStreams = async () => {
+        var requestOptions = await CommonService.requestOptionsForGetRequest();
         await fetch(config.STREAM, requestOptions)
             .then(response => response.text())
             .then(result => {
                 var streams = JSON.parse(result).streams;
-                console.log("sreams : ", streams);
                 streams.forEach((item: any) => {
                     item.index_set_id = indexSetMap.get(item.index_set_id);
                 });
-                console.log("stream after change", streams);
                 this.setState({
                     streamTableData: streams,
                 });
             }
             ).catch(error => console.log('error', error));
-
+    }
+    getTcpInputStream = async () => {
+        var requestOptions = await CommonService.requestOptionsForGetRequest();
         await fetch(config.TCP_INPUT_STREAM, requestOptions)
             .then(response => response.text())
             .then(result => {
@@ -118,9 +129,86 @@ export class Dashboard extends React.Component<any, any> {
             ).catch(error => console.log('error', error));
     }
 
+    rulesTableForStream = (rules: any) => {
+        var retData = [];
+        for (let i in rules) {
+            retData.push(
+                <tr>
+                    <td>{rules[i].field}</td>
+                    <td>{rules[i].value}</td>
+                    <td>{rules[i].description}</td>
+                </tr>
+            );
+        }
+        if (rules.length > 0) {
+            return (<table className="table-sm table-striped table-bordered table-hover">
+                <thead>List of Rules</thead>
+                <thead>
+                    <tr className="table-secondary">
+                        <td>Field </td>
+                        <td>Value </td>
+                        <td>Description </td>
+                    </tr>
+                </thead>
+                <tbody>
+                    {retData}
+                </tbody>
 
+            </table>)
+        }
+    }
     displayTableOfStream = () => {
         const { streamTableData } = this.state;
+        // let retData2 = streamTableData.map((rowData: any, index: any) => {
+        //     console.log("Row Data : ", rowData);
+        //     console.log("Row index : ", index);
+        //     // rowData = JSON.stringify(rowData);
+        //     // console.log("Row Data after stringfy: ", rowData);
+        //     return (`
+        //     <tr>
+        //         <td>
+        //             <h4 onClick={this.OpenAllEventsPopup}>${rowData['title']}</h4>
+        //             <span>Index set: &nbsp;&nbsp;${rowData['index_set_id']}</span>
+        //         </td>
+        //         <td>
+        //             <table className="inner-table">
+        //                 <tr>
+        //                     <td>
+        //                         <p>${rowData['description']}</p>
+        //                         <p>${rowData['rules']}&nbsp;&nbsp;
+        //                     {/* <a href="#">${rowData.descriptionLink}</a> */}
+        //                         </p>
+        //                     </td>
+        //                     <td>
+        //                         <div className="d-inline-block">
+        //                             <button className="blue-button m-b-0" onClick=${this.openNewStreamPopup}>Manage Rules</button>
+        //                             <button className="blue-button m-b-0" onClick=${this.OpenManageOutputPopup}>Manage Output</button>
+        //                             <button className="blue-button m-b-0">Manage Alerts</button>
+        //                         </div>
+        //                         <div className="d-inline-block table-btns">
+        //                             <div className="d-inline-block enabled-disabled-container">
+        //                                 <div className="enabled"></div>
+        //                             </div>
+        //                             <button className="btn btn-link"><i className="fa fa-edit"></i></button>
+        //                             <button className="btn btn-link"><i className="fa fa-trash"></i></button>
+        //                             <button className="btn btn-link" onClick=${() => this.onClickOpenSubLink(index)}><i className="fa fa-ellipsis-h"></i></button>
+        //                             {rowData.actionStatus == true && <div className="text-center open-create-menu">
+        //                                 <a href="#">Manage Rules</a>
+        //                                 <a href="#">MAnage Outputs</a>
+        //                                 <a href="#">MAnage Alerts</a>
+        //                                 <a href="#">Edit Stream</a>
+        //                                 <a href="#">Quick Add Rule</a>
+        //                                 <a href="#">Clone this Stream</a>
+        //                             </div>
+        //                             }
+        //                         </div>
+        //                     </td>
+        //                 </tr>
+        //             </table>
+        //         </td>
+        //     </tr>
+        //     `);
+        // })
         let retData = [];
         for (let i = 0; i < streamTableData.length; i++) {
             let rowData = streamTableData[i];
@@ -135,7 +223,9 @@ export class Dashboard extends React.Component<any, any> {
                             <tr>
                                 <td>
                                     <p>{rowData.description}</p>
-                                    <p>{rowData.rules}&nbsp;&nbsp;
+                                    <p>
+                                        {this.rulesTableForStream(rowData.rules)}
+                                        &nbsp;&nbsp;
                                     {/* <a href="#">{rowData.descriptionLink}</a> */}
                                     </p>
                                 </td>
@@ -257,9 +347,9 @@ export class Dashboard extends React.Component<any, any> {
                         <div className="table-container">
                             <div className="table-container-inner">
                                 <table className="table">
-                                    <tbody>
-                                        {this.displayTableOfStream()}
-                                    </tbody>
+
+                                    {this.displayTableOfStream()}
+
                                 </table>
                             </div>
                         </div>
