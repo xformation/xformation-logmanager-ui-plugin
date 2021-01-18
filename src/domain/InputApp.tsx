@@ -1,7 +1,7 @@
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
 import { Route, Switch, BrowserRouter } from 'react-router-dom';
-import { Input } from './input';
+import { Input } from './Input';
 import { config } from '../config';
 
 export default function init() {
