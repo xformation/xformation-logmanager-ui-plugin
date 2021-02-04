@@ -9,8 +9,6 @@ import { SetOutputPopup } from './setOutputParameter';
 import { AllEventsPopup } from './allEventPopup';
 import { TopMenu } from './topMenu';
 import { JsxEmit } from 'typescript';
-import { Button, Table } from 'react-bootstrap';
-import 'bootstrap/dist/css/bootstrap.min.css';
 
 class StreamData {
     id: any;
