@@ -44,7 +44,7 @@ export class Dashboard extends React.Component<any, any> {
                 route: `/`
             },
             {
-                label: "Log Managment | Dashboard",
+                label: "Log Managment",
                 isCurrentPage: true
             }
         ];
