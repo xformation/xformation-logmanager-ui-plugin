@@ -32,8 +32,8 @@ export class TopMenu extends React.Component<any, any> {
                 <button className="blue-button"><i className="fa fa-cog"></i>&nbsp;&nbsp; Dashboard</button>
                 <button className="blue-button" onClick={this.onClickOpenTcpInputPopup} ><i className="fa fa-cog"></i>&nbsp;&nbsp; Input</button>
                 <button className="blue-button" ><i className="fa fa-cog"></i>&nbsp;&nbsp; Pipeline</button>
-                <Link to={`${config.basePath}/ContentsPacks`} className="blue-button"><i className="fa fa-cog"></i>&nbsp;&nbsp; Content Packs</Link>
-                <button className="white-button float-right back-btn"><i className="fa fa-arrow-circle-left"></i>&nbsp;&nbsp; Back</button>
+                <Link to={`${config.basePath}/contentspacks`} className="blue-button"><i className="fa fa-cog"></i>&nbsp;&nbsp; Content Packs</Link>
+                <button className="white-button float-right m-r-0 back-btn"><i className="fa fa-arrow-circle-left"></i>&nbsp;&nbsp; Back</button>
                
             </div>
             <LaunchTcpInputPopup ref={this.launchTcpInputRef} />

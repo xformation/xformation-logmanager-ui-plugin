@@ -11,7 +11,7 @@ export default function init() {
       
       <BrowserRouter>
         <Switch>
-          <Route path={`${config.basePath}/ContentsPacks`} component={ContentPacks} />
+          <Route path={`${config.basePath}/contentspacks`} component={ContentPacks} />
         </Switch>
       </BrowserRouter>,
       document.getElementById('logmanager-main-container')

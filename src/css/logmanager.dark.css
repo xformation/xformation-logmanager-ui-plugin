@@ -8,7 +8,8 @@
     -webkit-flex: 0 0 33.33333%;
     -ms-flex: 0 0 33.33333%;
     flex: 0 0 33.33333%;
-    max-width: 33.33333%; }
+    max-width: 33.33333%;
+  }
   .col-xl-5 {
     position: relative;
     min-height: 1px;
@@ -18,7 +19,8 @@
     -webkit-flex: 0 0 20%;
     -ms-flex: 0 0 20%;
     flex: 0 0 20%;
-    max-width: 20%; }
+    max-width: 20%;
+  }
   .col-xl-7 {
     position: relative;
     min-height: 1px;
@@ -28,7 +30,8 @@
     -webkit-flex: 0 0 58.33333%;
     -ms-flex: 0 0 58.33333%;
     flex: 0 0 58.33333%;
-    max-width: 58.33333%; }
+    max-width: 58.33333%;
+  }
   .col-xl-8 {
     position: relative;
     min-height: 1px;
@@ -38,7 +41,9 @@
     -webkit-flex: 0 0 66.66667%;
     -ms-flex: 0 0 66.66667%;
     flex: 0 0 66.66667%;
-    max-width: 66.66667%; } }
+    max-width: 66.66667%;
+  }
+}
 
 /*********************************** Buttons *********************************/
 .blue-button {
@@ -51,10 +56,13 @@
   margin-bottom: 10px;
   display: inline-block !important;
   min-width: 100px;
-  text-align: center; }
-  .blue-button:hover, .blue-button:focus {
-    background: #0f5efd !important;
-    color: #ffffff !important; }
+  text-align: center;
+}
+.blue-button:hover,
+.blue-button:focus {
+  background: #0f5efd !important;
+  color: #ffffff !important;
+}
 
 .gray-button {
   background: #dde4e9 !important;
@@ -65,10 +73,13 @@
   margin-right: 10px;
   display: inline-block !important;
   min-width: 100px;
-  text-align: center; }
-  .gray-button:hover, .gray-button:focus {
-    background: #dbe0e4 !important;
-    color: #8392a7 !important; }
+  text-align: center;
+}
+.gray-button:hover,
+.gray-button:focus {
+  background: #dbe0e4 !important;
+  color: #8392a7 !important;
+}
 
 .white-button {
   background: white !important;
@@ -79,153 +90,205 @@
   border-radius: 2px !important;
   margin-right: 10px;
   display: inline-block !important;
-  text-align: center; }
-  .white-button:hover, .white-button:focus {
-    background: #e6e6e6 !important;
-    color: #3b4859 !important; }
-  .white-button i {
-    color: #57a4ff !important; }
+  text-align: center;
+}
+.white-button:hover,
+.white-button:focus {
+  background: #e6e6e6 !important;
+  color: #3b4859 !important;
+}
+.white-button i {
+  color: #57a4ff !important;
+}
 
-a:focus, a:hover {
-  color: #000000; }
+a:focus,
+a:hover {
+  color: #000000;
+}
 
 .float-right {
-  float: right; }
+  float: right;
+}
 
 .float-left {
-  float: left; }
+  float: left;
+}
 
 .text-left {
-  text-align: left; }
+  text-align: left;
+}
 
 .text-center {
-  text-align: center; }
+  text-align: center;
+}
 
 .text-right {
-  text-align: right; }
+  text-align: right;
+}
 
 .v-a-top {
-  vertical-align: top; }
+  vertical-align: top;
+}
 
 .v-a-middle {
-  vertical-align: middle; }
+  vertical-align: middle;
+}
 
 .d-flex {
-  display: flex; }
+  display: flex;
+}
 
 .d-block {
-  display: block; }
+  display: block;
+}
 
 .d-inline-block {
-  display: inline-block; }
+  display: inline-block;
+}
 
 .p-t-0 {
-  padding-top: 0 !important; }
+  padding-top: 0 !important;
+}
 
 .p-t-5 {
-  padding-top: 5px !important; }
+  padding-top: 5px !important;
+}
 
 .p-t-10 {
-  padding-top: 10px !important; }
+  padding-top: 10px !important;
+}
 
 .p-t-15 {
-  padding-top: 15px !important; }
+  padding-top: 15px !important;
+}
 
 .p-t-20 {
-  padding-top: 20px !important; }
+  padding-top: 20px !important;
+}
 
 .p-r-0 {
-  padding-right: 0 !important; }
+  padding-right: 0 !important;
+}
 
 .p-r-5 {
-  padding-right: 5px !important; }
+  padding-right: 5px !important;
+}
 
 .p-r-10 {
-  padding-right: 10px !important; }
+  padding-right: 10px !important;
+}
 
 .p-r-15 {
-  padding-right: 15px !important; }
+  padding-right: 15px !important;
+}
 
 .p-r-20 {
-  padding-right: 20px !important; }
+  padding-right: 20px !important;
+}
 
 .p-b-0 {
-  padding-bottom: 0px !important; }
+  padding-bottom: 0px !important;
+}
 
 .p-b-5 {
-  padding-bottom: 5px !important; }
+  padding-bottom: 5px !important;
+}
 
 .p-b-10 {
-  padding-bottom: 10px !important; }
+  padding-bottom: 10px !important;
+}
 
 .p-b-15 {
-  padding-bottom: 15px !important; }
+  padding-bottom: 15px !important;
+}
 
 .p-b-20 {
-  padding-bottom: 20px !important; }
+  padding-bottom: 20px !important;
+}
 
 .p-l-0 {
-  padding-left: 0 !important; }
+  padding-left: 0 !important;
+}
 
 .p-l-5 {
-  padding-left: 5px !important; }
+  padding-left: 5px !important;
+}
 
 .p-l-10 {
-  padding-left: 10px !important; }
+  padding-left: 10px !important;
+}
 
 .p-l-15 {
-  padding-left: 15px !important; }
+  padding-left: 15px !important;
+}
 
 .p-l-20 {
-  padding-left: 20px !important; }
+  padding-left: 20px !important;
+}
 
 .m-l-0 {
-  margin-left: 0 !important; }
+  margin-left: 0 !important;
+}
 
 .m-r-0 {
-  margin-right: 0 !important; }
+  margin-right: 0 !important;
+}
 
 .m-t-0 {
-  margin-top: 0 !important; }
+  margin-top: 0 !important;
+}
 
 .m-b-0 {
-  margin-bottom: 0 !important; }
+  margin-bottom: 0 !important;
+}
 
 .width-25 {
-  width: 25%; }
+  width: 25%;
+}
 
 .width-50 {
-  width: 50%; }
+  width: 50%;
+}
 
 .width-75 {
-  width: 75%; }
+  width: 75%;
+}
 
 .width-100 {
-  width: 100%; }
+  width: 100%;
+}
 
 .width-auto {
-  width: auto; }
+  width: auto;
+}
 
 .min-width-inherit {
-  min-width: inherit !important; }
+  min-width: inherit !important;
+}
 
 .border-bottom-0 {
-  border-bottom: none !important; }
+  border-bottom: none !important;
+}
 
 .orange {
-  color: #FF8F00; }
+  color: #ff8f00;
+}
 
 .yellow-green {
-  color: #7ED321; }
+  color: #7ed321;
+}
 
 .red {
-  color: #F93D3D; }
+  color: #f93d3d;
+}
 
 .yellow {
-  color: #FFFF00; }
+  color: #ffff00;
+}
 
 .blue {
-  color: #438AFB; }
+  color: #438afb;
+}
 
 .form-control {
   display: block;
@@ -240,7 +303,8 @@ a:focus, a:hover {
   background-clip: padding-box;
   border: 1px solid #ced4da;
   border-radius: 0.25rem;
-  transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out; }
+  transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+}
 
 .input-group-text {
   display: -ms-flexbox;
@@ -257,99 +321,118 @@ a:focus, a:hover {
   white-space: nowrap;
   background-color: #e9ecef;
   border: 1px solid #ced4da;
-  border-radius: 0.25rem; }
+  border-radius: 0.25rem;
+}
 
 @media (max-width: 992px) {
   .breadcrumbs-container .breadcrumbs {
     float: none;
-    padding-top: 5px; } }
+    padding-top: 5px;
+  }
+}
 
 /*********************************** Filters Container *********************************/
 .form-group {
-  margin-bottom: 1rem; }
-  .form-group label {
-    margin-bottom: 0.5rem; }
+  margin-bottom: 1rem;
+}
+.form-group label {
+  margin-bottom: 0.5rem;
+}
 
 .filter-container .filter-control-group {
   max-width: 250px;
-  padding-left: 0px; }
-  .filter-container .filter-control-group .form-control {
-    background-color: #f0f3f7 !important;
-    border: none !important;
-    font-size: 12px;
-    cursor: pointer;
-    height: 35px; }
-  .filter-container .filter-control-group label {
-    color: #ffffff;
-    font-size: 14px; }
+  padding-left: 0px;
+}
+.filter-container .filter-control-group .form-control {
+  background-color: #f0f3f7 !important;
+  border: none !important;
+  font-size: 12px;
+  cursor: pointer;
+  height: 35px;
+}
+.filter-container .filter-control-group label {
+  color: #ffffff;
+  font-size: 14px;
+}
 
 .logmanager-page-container {
   background-color: #3b4859;
   margin: 10px 20px;
   border-radius: 10px;
-  padding-bottom: 10px; }
-  .logmanager-page-container .common-container {
-    padding-top: 20px;
-    padding-left: 15px;
-    padding-right: 15px;
-    padding-bottom: 15px;
-    border-bottom: 1px solid #202226; }
-  .logmanager-page-container .page-heading {
-    display: block;
-    margin-bottom: 0; }
-    .logmanager-page-container .page-heading h1 {
-      color: #ffffff;
-      font-weight: 600;
-      font-size: 24px;
-      line-height: 32px;
-      display: block;
-      margin-bottom: 0; }
-    .logmanager-page-container .page-heading span {
-      display: block;
-      color: #A9B9C6;
-      font-size: 13px;
-      line-height: 18px;
-      font-weight: 500; }
+  padding-bottom: 10px;
+}
+.logmanager-page-container .common-container {
+  padding-top: 20px;
+  padding-left: 45px;
+  padding-right: 45px;
+  padding-bottom: 15px;
+  border-bottom: 1px solid #202226;
+}
+.logmanager-page-container .page-heading {
+  display: block;
+  margin-bottom: 0;
+}
+.logmanager-page-container .page-heading h1 {
+  color: #ffffff;
+  font-weight: 600;
+  font-size: 24px;
+  line-height: 32px;
+  display: block;
+  margin-bottom: 0;
+}
+.logmanager-page-container .page-heading span {
+  display: block;
+  color: #a9b9c6;
+  font-size: 13px;
+  line-height: 18px;
+  font-weight: 500;
+}
 
 .enabled-disabled-container {
   width: 16px;
-  margin-right: 7px; }
-  .enabled-disabled-container .enabled {
-    width: 8px;
-    height: 8px;
-    background-color: #004fac;
-    display: inline-block;
-    position: relative;
-    margin: 5px 0 0 5px; }
-    .enabled-disabled-container .enabled:after {
-      position: absolute;
-      left: -4px;
-      top: -4px;
-      width: 16px;
-      height: 16px;
-      content: "";
-      border: 1px solid #004fac;
-      border-radius: 50%; }
+  margin-right: 7px;
+}
+.enabled-disabled-container .enabled {
+  width: 8px;
+  height: 8px;
+  background-color: #004fac;
+  display: inline-block;
+  position: relative;
+  margin: 5px 0 0 5px;
+}
+.enabled-disabled-container .enabled:after {
+  position: absolute;
+  left: -4px;
+  top: -4px;
+  width: 16px;
+  height: 16px;
+  content: "";
+  border: 1px solid #004fac;
+  border-radius: 50%;
+}
 
 .enabled-disabled-container {
   width: 16px;
-  margin-right: 7px; }
-  .enabled-disabled-container .disabled {
-    width: 8px;
-    height: 8px;
-    background-color: #004fac;
-    display: inline-block;
-    position: relative;
-    margin: 5px 0 0 5px; }
-    .enabled-disabled-container .disabled:after {
-      position: absolute;
-      left: -4px;
-      top: -4px;
-      width: 16px;
-      height: 16px;
-      content: "";
-      border: 1px solid #004fac;
-      border-radius: 50%; }
+  margin-right: 7px;
+}
+.enabled-disabled-container .disabled {
+  width: 8px;
+  height: 8px;
+  background-color: #004fac;
+  display: inline-block;
+  position: relative;
+  margin: 5px 0 0 5px;
+}
+.enabled-disabled-container .disabled:after {
+  position: absolute;
+  left: -4px;
+  top: -4px;
+  width: 16px;
+  height: 16px;
+  content: "";
+  border: 1px solid #004fac;
+  border-radius: 50%;
+}
 
 .open-create-menu {
   position: absolute;
@@ -359,360 +442,510 @@ a:focus, a:hover {
   box-shadow: 0px 2px 5px #00000029;
   width: 120px;
   z-index: 10;
-  padding: 5px 0; }
-  .open-create-menu a {
-    color: #2a9ce7;
-    font-size: 12px;
-    font-weight: 400;
-    line-height: 20px;
-    display: block;
-    padding: 4px 0; }
+  padding: 5px 0;
+}
+.open-create-menu a {
+  color: #2a9ce7;
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 20px;
+  display: block;
+  padding: 4px 0;
+}
 
 .modal {
   max-width: 992px !important;
   -webkit-box-shadow: 0px 0px 16px #3b48593d;
   box-shadow: 0px 0px 16px #3b48593d;
   border-radius: 10px;
-  background: white; }
+  background: white;
+}
 
 .breadcrumbs-container {
   background-color: #3b4859;
   padding: 14px 20px 15px;
-  font-size: 13px; }
-  .breadcrumbs-container .page-title {
-    color: #ffffff;
-    display: inline-block; }
-  .breadcrumbs-container .breadcrumbs {
-    float: right; }
-  .breadcrumbs-container a.breadcrumbs-link {
-    color: #fcfcfc; }
-  .breadcrumbs-container .current-page {
-    color: #fcfcfc; }
-  .breadcrumbs-container .separator {
-    color: #fcfcfc;
-    display: inline-block;
-    padding: 0 10px; }
+  font-size: 13px;
+}
+.breadcrumbs-container .page-title {
+  color: #ffffff;
+  display: inline-block;
+}
+.breadcrumbs-container .breadcrumbs {
+  float: right;
+}
+.breadcrumbs-container a.breadcrumbs-link {
+  color: #fcfcfc;
+}
+.breadcrumbs-container .current-page {
+  color: #fcfcfc;
+}
+.breadcrumbs-container .separator {
+  color: #fcfcfc;
+  display: inline-block;
+  padding: 0 10px;
+}
 
 @media (max-width: 768px) {
   .breadcrumbs-container .breadcrumbs {
     float: none;
-    padding-top: 5px; } }
+    padding-top: 5px;
+  }
+}
 
 .logmanager-modal-container {
   max-width: 992px !important;
-  -webkit-box-shadow: 0px 0px 16px #3B48593D;
-  box-shadow: 0px 0px 16px #3B48593D;
+  -webkit-box-shadow: 0px 0px 16px #3b48593d;
+  box-shadow: 0px 0px 16px #3b48593d;
   border-radius: 10px;
-  background: white; }
-  .logmanager-modal-container .modal-content {
-    padding: 30px; }
-    .logmanager-modal-container .modal-content .modal-header {
-      background: white;
-      box-shadow: none;
-      border-bottom: 1px dashed #a2c0d4;
-      margin-bottom: 20px;
-      padding: 0 10px 10px; }
-      .logmanager-modal-container .modal-content .modal-header .modal-title {
-        color: #3b4859;
-        float: left;
-        margin: 0px;
-        font-size: 16px;
-        font-weight: 500;
-        padding: 0;
-        line-height: 28px; }
-        .logmanager-modal-container .modal-content .modal-header .modal-title span {
-          font-weight: 400; }
-      .logmanager-modal-container .modal-content .modal-header button {
-        float: right;
-        font-size: 28px;
-        top: 0;
-        position: relative;
-        color: #ffffff;
-        opacity: 1;
-        width: 28px;
-        height: 28px;
-        background-color: red;
-        border-radius: 50%;
-        border: none;
-        line-height: 28px;
-        text-align: center; }
-    .logmanager-modal-container .modal-content .modal-body {
-      padding: 0px 10px;
-      color: #3b4859; }
-      .logmanager-modal-container .modal-content .modal-body p {
-        font-style: italic; }
-      .logmanager-modal-container .modal-content .modal-body .form-group {
-        padding-bottom: 5px; }
-        .logmanager-modal-container .modal-content .modal-body .form-group label {
-          font-size: 15px;
-          font-weight: 500;
-          line-height: 18px;
-          color: #3B4859;
-          padding-right: 0px;
-          padding-bottom: 0px;
-          display: block; }
-        .logmanager-modal-container .modal-content .modal-body .form-group .form-control {
-          background-color: #f0f3f7 !important;
-          border: none !important;
-          font-size: 13px;
-          height: 36px; }
-        .logmanager-modal-container .modal-content .modal-body .form-group .input-group-text {
-          background-color: #FFFFFF;
-          border: 1px solid #8392A7;
-          border-radius: 4px;
-          font-size: 14px;
-          font-weight: 400;
-          line-height: 34px;
-          font-style: italic;
-          color: #3B4859;
-          padding: 0 15px;
-          width: 100%;
-          text-align: left;
-          display: block; }
-        .logmanager-modal-container .modal-content .modal-body .form-group span {
-          padding-top: 5px;
-          font-size: 13px;
-          line-height: 16px;
-          font-weight: 400;
-          font-style: italic;
-          display: block; }
-        .logmanager-modal-container .modal-content .modal-body .form-group .checkbox {
-          display: inline-block;
-          margin-right: 5px;
-          vertical-align: middle;
-          cursor: pointer;
-          margin-top: -4px; }
-        .logmanager-modal-container .modal-content .modal-body .form-group textarea.form-control {
-          height: 120px; }
-        .logmanager-modal-container .modal-content .modal-body .form-group .select-rule {
-          margin-top: 10px;
-          margin-left: 30px; }
-        .logmanager-modal-container .modal-content .modal-body .form-group .d-inline-block {
-          display: inline-block; }
-        .logmanager-modal-container .modal-content .modal-body .form-group .width-auto {
-          width: auto; }
-        .logmanager-modal-container .modal-content .modal-body .form-group .text {
-          padding: 0 3px;
-          line-height: 12px;
-          vertical-align: top; }
-      .logmanager-modal-container .modal-content .modal-body .form-check .form-check-input {
-        margin-right: 7px; }
-      .logmanager-modal-container .modal-content .modal-body .form-check .form-check-label {
-        font-size: 14px;
-        font-weight: 400;
-        line-height: 18px;
-        color: #3B4859; }
-      .logmanager-modal-container .modal-content .modal-body .check-group {
-        display: block;
-        padding-bottom: 5px; }
-        .logmanager-modal-container .modal-content .modal-body .check-group input {
-          display: inline-block;
-          vertical-align: middle; }
-        .logmanager-modal-container .modal-content .modal-body .check-group label {
-          display: inline-block;
-          font-size: 13px;
-          line-height: 21px;
-          font-weight: 400;
-          vertical-align: top;
-          padding-left: 8px; }
-    .logmanager-modal-container .modal-content .modal-footer {
-      padding: 20px 15px 0px;
-      background: none;
-      border: none;
-      border-top: 1px dashed #a2c0d4; }
-      .logmanager-modal-container .modal-content .modal-footer .blue-button {
-        border-radius: 7px !important; }
-      .logmanager-modal-container .modal-content .modal-footer .gray-button {
-        border-radius: 7px !important; }
-      .logmanager-modal-container .modal-content .modal-footer .white-button {
-        border-radius: 7px !important; }
-    .logmanager-modal-container .modal-content .contact-popup-buttons button {
-      border: 1px solid #89898a;
-      background-color: #89898a;
-      color: #ffffff;
-      font-size: 15px;
-      line-height: 36px;
-      font-weight: 500;
-      padding: 0 30px;
-      margin: 0;
-      border-radius: 5px;
-      text-align: center; }
-      .logmanager-modal-container .modal-content .contact-popup-buttons button.save {
-        border-color: #3B7CFF;
-        background-color: #3B7CFF;
-        color: #ffffff;
-        margin-left: 15px; }
-    .logmanager-modal-container .modal-content .popup-parameters-container span {
-      font-size: 14px;
-      display: block;
-      line-height: 18px;
-      color: #3b4859;
-      font-weight: 400;
-      padding-bottom: 15px; }
-    .logmanager-modal-container .modal-content .popup-parameters-container .blue-button {
-      font-size: 13px; }
-    .logmanager-modal-container .modal-content .rules-defined {
-      border-top: 1px dashed #a2c0d4;
-      padding-top: 5px;
-      margin-bottom: 50px; }
-      .logmanager-modal-container .modal-content .rules-defined .no-rules-defined {
-        background-color: #f8faff;
-        padding: 5px 5px;
-        display: block; }
-        .logmanager-modal-container .modal-content .rules-defined .no-rules-defined i {
-          display: inline-block;
-          padding-right: 7px;
-          font-size: 13px;
-          line-height: 18px;
-          color: #3b97d3; }
-        .logmanager-modal-container .modal-content .rules-defined .no-rules-defined span {
-          display: inline-block;
-          font-size: 13px;
-          line-height: 18px;
-          color: #3b4859;
-          padding-bottom: 0px; }
-      .logmanager-modal-container .modal-content .rules-defined .manage-rules {
-        display: block;
-        padding-top: 10px; }
-        .logmanager-modal-container .modal-content .rules-defined .manage-rules h4 {
-          font-size: 14px;
-          line-height: 18px;
-          font-weight: 500;
-          margin-bottom: 0;
-          display: block; }
-        .logmanager-modal-container .modal-content .rules-defined .manage-rules span {
-          font-size: 13px;
-          line-height: 18px;
-          font-weight: 400;
-          padding-bottom: 0;
-          display: block;
-          font-style: italic; }
-    .logmanager-modal-container .modal-content .message-tabs-container span {
-      display: block;
-      font-size: 14px;
-      line-height: 18px;
-      font-weight: 500;
-      padding-bottom: 10px; }
-    .logmanager-modal-container .modal-content .message-tabs-container .messages-tabs {
-      display: block; }
-      .logmanager-modal-container .modal-content .message-tabs-container .messages-tabs ul li {
-        display: inline-block; }
-        .logmanager-modal-container .modal-content .message-tabs-container .messages-tabs ul li a {
-          background-color: #fafbfd;
-          border: 2px solid #fafbfd;
-          padding: 10px 10px;
-          color: #2662f0;
-          font-size: 14px;
-          line-height: 18px;
-          font-weight: 500;
-          display: block; }
-        .logmanager-modal-container .modal-content .message-tabs-container .messages-tabs ul li.active-tab a {
-          background-color: #ffffff; }
-      .logmanager-modal-container .modal-content .message-tabs-container .messages-tabs .lod-messages {
-        font-size: 13px;
-        line-height: 18px;
-        font-weight: 400;
-        font-style: italic;
-        display: block;
-        padding-top: 15px;
-        padding-bottom: 10px; }
-      .logmanager-modal-container .modal-content .message-tabs-container .messages-tabs .form-group .input-group-text {
-        margin-right: 15px;
-        max-width: 300px;
-        width: 300px;
-        display: inline-block; }
+  background: white;
+}
+.logmanager-modal-container .modal-content {
+  padding: 30px;
+}
+.logmanager-modal-container .modal-content .modal-header {
+  background: white;
+  box-shadow: none;
+  border-bottom: 1px dashed #a2c0d4;
+  margin-bottom: 20px;
+  padding: 0 10px 10px;
+}
+.logmanager-modal-container .modal-content .modal-header .modal-title {
+  color: #3b4859;
+  float: left;
+  margin: 0px;
+  font-size: 16px;
+  font-weight: 500;
+  padding: 0;
+  line-height: 28px;
+}
+.logmanager-modal-container .modal-content .modal-header .modal-title span {
+  font-weight: 400;
+}
+.logmanager-modal-container .modal-content .modal-header button {
+  float: right;
+  font-size: 28px;
+  top: 0;
+  position: relative;
+  color: #ffffff;
+  opacity: 1;
+  width: 28px;
+  height: 28px;
+  background-color: red;
+  border-radius: 50%;
+  border: none;
+  line-height: 28px;
+  text-align: center;
+}
+.logmanager-modal-container .modal-content .modal-body {
+  padding: 0px 10px;
+  color: #3b4859;
+}
+.logmanager-modal-container .modal-content .modal-body p {
+  font-style: italic;
+}
+.logmanager-modal-container .modal-content .modal-body .form-group {
+  padding-bottom: 5px;
+}
+.logmanager-modal-container .modal-content .modal-body .form-group label {
+  font-size: 15px;
+  font-weight: 500;
+  line-height: 18px;
+  color: #3b4859;
+  padding-right: 0px;
+  padding-bottom: 0px;
+  display: block;
+}
+.logmanager-modal-container
+  .modal-content
+  .modal-body
+  .form-group
+  .form-control {
+  background-color: #f0f3f7 !important;
+  border: none !important;
+  font-size: 13px;
+  height: 36px;
+}
+.logmanager-modal-container
+  .modal-content
+  .modal-body
+  .form-group
+  .input-group-text {
+  background-color: #ffffff;
+  border: 1px solid #8392a7;
+  border-radius: 4px;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 34px;
+  font-style: italic;
+  color: #3b4859;
+  padding: 0 15px;
+  width: 100%;
+  text-align: left;
+  display: block;
+}
+.logmanager-modal-container .modal-content .modal-body .form-group span {
+  padding-top: 5px;
+  font-size: 13px;
+  line-height: 16px;
+  font-weight: 400;
+  font-style: italic;
+  display: block;
+}
+.logmanager-modal-container .modal-content .modal-body .form-group .checkbox {
+  display: inline-block;
+  margin-right: 5px;
+  vertical-align: middle;
+  cursor: pointer;
+  margin-top: -4px;
+}
+.logmanager-modal-container
+  .modal-content
+  .modal-body
+  .form-group
+  textarea.form-control {
+  height: 120px;
+}
+.logmanager-modal-container
+  .modal-content
+  .modal-body
+  .form-group
+  .select-rule {
+  margin-top: 10px;
+  margin-left: 30px;
+}
+.logmanager-modal-container
+  .modal-content
+  .modal-body
+  .form-group
+  .d-inline-block {
+  display: inline-block;
+}
+.logmanager-modal-container .modal-content .modal-body .form-group .width-auto {
+  width: auto;
+}
+.logmanager-modal-container .modal-content .modal-body .form-group .text {
+  padding: 0 3px;
+  line-height: 12px;
+  vertical-align: top;
+}
+.logmanager-modal-container
+  .modal-content
+  .modal-body
+  .form-check
+  .form-check-input {
+  margin-right: 7px;
+}
+.logmanager-modal-container
+  .modal-content
+  .modal-body
+  .form-check
+  .form-check-label {
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 18px;
+  color: #3b4859;
+}
+.logmanager-modal-container .modal-content .modal-body .check-group {
+  display: block;
+  padding-bottom: 5px;
+}
+.logmanager-modal-container .modal-content .modal-body .check-group input {
+  display: inline-block;
+  vertical-align: middle;
+}
+.logmanager-modal-container .modal-content .modal-body .check-group label {
+  display: inline-block;
+  font-size: 13px;
+  line-height: 21px;
+  font-weight: 400;
+  vertical-align: top;
+  padding-left: 8px;
+}
+.logmanager-modal-container .modal-content .modal-footer {
+  padding: 20px 15px 0px;
+  background: none;
+  border: none;
+  border-top: 1px dashed #a2c0d4;
+}
+.logmanager-modal-container .modal-content .modal-footer .blue-button {
+  border-radius: 7px !important;
+}
+.logmanager-modal-container .modal-content .modal-footer .gray-button {
+  border-radius: 7px !important;
+}
+.logmanager-modal-container .modal-content .modal-footer .white-button {
+  border-radius: 7px !important;
+}
+.logmanager-modal-container .modal-content .contact-popup-buttons button {
+  border: 1px solid #89898a;
+  background-color: #89898a;
+  color: #ffffff;
+  font-size: 15px;
+  line-height: 36px;
+  font-weight: 500;
+  padding: 0 30px;
+  margin: 0;
+  border-radius: 5px;
+  text-align: center;
+}
+.logmanager-modal-container .modal-content .contact-popup-buttons button.save {
+  border-color: #3b7cff;
+  background-color: #3b7cff;
+  color: #ffffff;
+  margin-left: 15px;
+}
+.logmanager-modal-container .modal-content .popup-parameters-container span {
+  font-size: 14px;
+  display: block;
+  line-height: 18px;
+  color: #3b4859;
+  font-weight: 400;
+  padding-bottom: 15px;
+}
+.logmanager-modal-container
+  .modal-content
+  .popup-parameters-container
+  .blue-button {
+  font-size: 13px;
+}
+.logmanager-modal-container .modal-content .rules-defined {
+  border-top: 1px dashed #a2c0d4;
+  padding-top: 5px;
+  margin-bottom: 50px;
+}
+.logmanager-modal-container .modal-content .rules-defined .no-rules-defined {
+  background-color: #f8faff;
+  padding: 5px 5px;
+  display: block;
+}
+.logmanager-modal-container .modal-content .rules-defined .no-rules-defined i {
+  display: inline-block;
+  padding-right: 7px;
+  font-size: 13px;
+  line-height: 18px;
+  color: #3b97d3;
+}
+.logmanager-modal-container
+  .modal-content
+  .rules-defined
+  .no-rules-defined
+  span {
+  display: inline-block;
+  font-size: 13px;
+  line-height: 18px;
+  color: #3b4859;
+  padding-bottom: 0px;
+}
+.logmanager-modal-container .modal-content .rules-defined .manage-rules {
+  display: block;
+  padding-top: 10px;
+}
+.logmanager-modal-container .modal-content .rules-defined .manage-rules h4 {
+  font-size: 14px;
+  line-height: 18px;
+  font-weight: 500;
+  margin-bottom: 0;
+  display: block;
+}
+.logmanager-modal-container .modal-content .rules-defined .manage-rules span {
+  font-size: 13px;
+  line-height: 18px;
+  font-weight: 400;
+  padding-bottom: 0;
+  display: block;
+  font-style: italic;
+}
+.logmanager-modal-container .modal-content .message-tabs-container span {
+  display: block;
+  font-size: 14px;
+  line-height: 18px;
+  font-weight: 500;
+  padding-bottom: 10px;
+}
+.logmanager-modal-container
+  .modal-content
+  .message-tabs-container
+  .messages-tabs {
+  display: block;
+}
+.logmanager-modal-container
+  .modal-content
+  .message-tabs-container
+  .messages-tabs
+  ul
+  li {
+  display: inline-block;
+}
+.logmanager-modal-container
+  .modal-content
+  .message-tabs-container
+  .messages-tabs
+  ul
+  li
+  a {
+  background-color: #fafbfd;
+  border: 2px solid #fafbfd;
+  padding: 10px 10px;
+  color: #2662f0;
+  font-size: 14px;
+  line-height: 18px;
+  font-weight: 500;
+  display: block;
+}
+.logmanager-modal-container
+  .modal-content
+  .message-tabs-container
+  .messages-tabs
+  ul
+  li.active-tab
+  a {
+  background-color: #ffffff;
+}
+.logmanager-modal-container
+  .modal-content
+  .message-tabs-container
+  .messages-tabs
+  .lod-messages {
+  font-size: 13px;
+  line-height: 18px;
+  font-weight: 400;
+  font-style: italic;
+  display: block;
+  padding-top: 15px;
+  padding-bottom: 10px;
+}
+.logmanager-modal-container
+  .modal-content
+  .message-tabs-container
+  .messages-tabs
+  .form-group
+  .input-group-text {
+  margin-right: 15px;
+  max-width: 300px;
+  width: 300px;
+  display: inline-block;
+}
 
 .streams-text h3 {
   font-size: 15px;
   font-weight: 500;
   line-height: 20px;
-  margin-bottom: 3px; }
+  margin-bottom: 3px;
+}
 
 .streams-text p {
   font-size: 12px;
   line-height: 18px;
   margin-bottom: 0;
-  font-weight: 400; }
+  font-weight: 400;
+}
 
 .search-control {
   position: relative;
   margin-bottom: 0;
-  margin-right: 15px; }
-  .search-control .input-group-text {
-    max-width: 100%;
-    text-align: left;
-    padding-right: 15px;
-    padding-left: 30px;
-    width: 100%;
-    border: 1px solid #ced4da;
-    background-color: #ffffff;
-    border-radius: 3px;
-    padding-top: 0.399rem; }
-  .search-control button {
-    position: absolute;
-    left: 0;
-    top: 0;
-    z-index: 1;
-    cursor: pointer;
-    border: none;
-    background-color: transparent;
-    width: 34px;
-    height: 34px; }
+  margin-right: 15px;
+}
+.search-control .input-group-text {
+  max-width: 100%;
+  text-align: left;
+  padding-right: 15px;
+  padding-left: 30px;
+  width: 100%;
+  border: 1px solid #ced4da;
+  background-color: #ffffff;
+  border-radius: 3px;
+  padding-top: 0.399rem;
+}
+.search-control button {
+  position: absolute;
+  left: 0;
+  top: 0;
+  z-index: 1;
+  cursor: pointer;
+  border: none;
+  background-color: transparent;
+  width: 34px;
+  height: 34px;
+}
 
 .table-container {
   border: 1px solid #f5f6f5;
   padding: 5px 5px 10px;
-  display: grid; }
-  .table-container .table-container-inner {
-    overflow-x: scroll;
-    width: 100%;
-    background-color: #ffffff; }
-    .table-container .table-container-inner .table {
-      white-space: nowrap;
-      width: 1200px; }
-      .table-container .table-container-inner .table tr:nth-child(odd) td {
-        background-color: #f8f9fb; }
-      .table-container .table-container-inner .table tr td {
-        padding: 5px 10px;
-        color: #323C47;
-        font-size: 11px;
-        line-height: 20px;
-        font-weight: 400; }
-        .table-container .table-container-inner .table tr td:first-child {
-          margin-right: 5px; }
-        .table-container .table-container-inner .table tr td:last-child {
-          margin-left: 5px; }
-        .table-container .table-container-inner .table tr td h4 {
-          font-size: 14px;
-          font-weight: 600;
-          line-height: 18px;
-          color: #3b7cff;
-          margin-bottom: 5px;
-          cursor: pointer; }
-        .table-container .table-container-inner .table tr td p {
-          margin-bottom: 3px; }
-        .table-container .table-container-inner .table tr td a {
-          color: #3b7cff; }
-        .table-container .table-container-inner .table tr td .blue-button {
-          font-size: 12px; }
-        .table-container .table-container-inner .table tr td .table-btns {
-          position: relative; }
-        .table-container .table-container-inner .table tr td .btn-link {
-          color: #3b7cff;
-          padding: 0 7px;
-          font-size: 18px; }
-      .table-container .table-container-inner .table .inner-table tr:nth-child(odd) td {
-        background-color: transparent; }
-      .table-container .table-container-inner .table .inner-table tr td {
-        width: 50%; }
+  display: grid;
+}
+.table-container .table-container-inner {
+  overflow-x: scroll;
+  width: 100%;
+  background-color: #ffffff;
+}
+.table-container .table-container-inner .table {
+  white-space: nowrap;
+  width: 1200px;
+}
+.table-container .table-container-inner .table tr:nth-child(odd) td {
+  background-color: #f8f9fb;
+}
+.table-container .table-container-inner .table tr td {
+  padding: 5px 10px;
+  color: #323c47;
+  font-size: 11px;
+  line-height: 20px;
+  font-weight: 400;
+}
+.table-container .table-container-inner .table tr td:first-child {
+  margin-right: 5px;
+}
+.table-container .table-container-inner .table tr td:last-child {
+  margin-left: 5px;
+}
+.table-container .table-container-inner .table tr td h4 {
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 18px;
+  color: #3b7cff;
+  margin-bottom: 5px;
+  cursor: pointer;
+}
+.table-container .table-container-inner .table tr td p {
+  margin-bottom: 3px;
+}
+.table-container .table-container-inner .table tr td a {
+  color: #3b7cff;
+}
+.table-container .table-container-inner .table tr td .blue-button {
+  font-size: 12px;
+}
+.table-container .table-container-inner .table tr td .table-btns {
+  position: relative;
+}
+.table-container .table-container-inner .table tr td .btn-link {
+  color: #3b7cff;
+  padding: 0 7px;
+  font-size: 18px;
+}
+.table-container
+  .table-container-inner
+  .table
+  .inner-table
+  tr:nth-child(odd)
+  td {
+  background-color: transparent;
+}
+.table-container .table-container-inner .table .inner-table tr td {
+  width: 50%;
+}
 
 @media (max-width: 1200px) {
   .back-btn {
-    float: none; }
+    float: none;
+  }
   .search-control {
-    margin-bottom: 10px; }
+    margin-bottom: 10px;
+  }
   .new-stream-btn {
     float: none;
-    display: inline-block; } }
+    display: inline-block;
+  }
+}
 
 /*# sourceMappingURL=logmanager.dark.css.map */
