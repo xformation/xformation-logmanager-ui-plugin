@@ -1,5 +1,6 @@
 import * as React from 'react';
 import './table.css';
+
 const sortEnum = {
     NONE: 0,
     ASCENDING: 1,
@@ -29,7 +30,7 @@ export class Table extends React.Component<any, any> {
     };
 
     tableBodyData() {
-        const { displayData, searchKey, perPageLimit, currentPage, columns, visibleCheckbox } = this.state;
+        const { displayData, perPageLimit, currentPage, columns, visibleCheckbox } = this.state;
         const retData = [];
         const length = displayData.length;
         const cLength = columns.length;
@@ -37,10 +38,10 @@ export class Table extends React.Component<any, any> {
             for (let i = 0; i < length; i++) {
                 if (i >= currentPage * perPageLimit && i <= (currentPage * perPageLimit + (perPageLimit - 1))) {
                     const tdJSX = [];
-                    if (visibleCheckbox == true) {
+                    if (visibleCheckbox === true) {
                         tdJSX.push(
                             <td>
-                                <input type="checkbox" checked={displayData[i].checkStatus} className="checkbox" onChange={(e) => { this.onChangeParentCheckbox(e, i) }} />
+                                <input type="checkbox" checked={displayData[i].checkStatus} className={`checkbox`} onChange={(e) => { this.onChangeParentCheckbox(e, i) }} />
                             </td>
                         );
                     }
@@ -60,7 +61,7 @@ export class Table extends React.Component<any, any> {
                             }
                         }
                     }
-                    retData.push(<tr key={i}>{tdJSX}</tr>);
+                    retData.push(<tr className={`${displayData[i].checkStatus ? 'checked-row' : ''}`} key={i}>{tdJSX}</tr>);
                 }
             }
         } else {
@@ -106,7 +107,7 @@ export class Table extends React.Component<any, any> {
         const { sortType, sortKey, columns, visibleCheckbox, displayData } = this.state;
         const length = columns.length;
         const retData = [];
-        if (visibleCheckbox == true && displayData.length > 0) {
+        if (visibleCheckbox === true && displayData.length > 0) {
             retData.push(<th><input type="checkbox" checked={this.state.isAllChecked} onChange={this.checkAllBoxes} className="checkbox" /></th>);
         }
         for (let i = 0; i < length; i++) {
@@ -152,13 +153,13 @@ export class Table extends React.Component<any, any> {
         let countCheckedCheckbox = 0;
         displayData[index].checkStatus = checked;
         for (let j = 0; j < displayData.length; j++) {
-            if (displayData[j].checkStatus == true) {
+            if (displayData[j].checkStatus === true) {
                 countCheckedCheckbox++;
             } else {
                 countCheckedCheckbox--;
             }
         }
-        if (countCheckedCheckbox == displayData.length) {
+        if (countCheckedCheckbox === displayData.length) {
             status = true;
         } else {
             status = false;
@@ -170,25 +171,25 @@ export class Table extends React.Component<any, any> {
     }
 
     peginationOfTable() {
-        const { currentPage, totalPages, displayData, perPageLimit } = this.state;
+        const { currentPage, totalPages, displayData } = this.state;
         let rows = [];
         if (displayData.length > 0) {
             for (let i = 0; i < totalPages; i++) {
                 rows.push(<li className="page-item" key={i}><a className={currentPage === i ? 'page-link active' : 'page-link deactive'} href="#" onClick={(e) => this.navigatePage('btn-click', e, i)}>{i + 1}</a></li >);
             }
             return (
-                <ul>
-                    <li className="page-item previous">
+                <div className="pagination">
+                    <div className="page-item previous">
                         <a className={currentPage === 0 ? 'page-link desable' : 'page-link enable'} href="#" onClick={(e) => this.navigatePage('pre', e, '')}>Previous</a>
-                    </li>
-                    <div ref={this.paginationRef}>
-                        {rows}
                     </div>
+                    <ul ref={this.paginationRef}>
+                        {rows}
+                    </ul>
                     {/* <li><a href="#">......</a></li> */}
-                    <li className="page-item next">
+                    <div className="page-item next">
                         <a className={currentPage === this.state.totalPages - 1 ? 'page-link desable' : 'page-link enable'} href="#" onClick={(e) => this.navigatePage('next', e, '')}>Next</a>
-                    </li>
-                </ul>
+                    </div>
+                </div>
             );
         }
     }
@@ -221,7 +222,7 @@ export class Table extends React.Component<any, any> {
     setCurrentPageIntoView = () => {
         const { currentPage } = this.state;
         let scrollLeft = currentPage * 28;
-        if(this.paginationRef.current){
+        if (this.paginationRef.current) {
             this.paginationRef.current.scrollTo(scrollLeft, 0);
         }
     };
@@ -243,27 +244,39 @@ export class Table extends React.Component<any, any> {
     }
 
     onSearchChange = (e: any) => {
-        let { value } = e.target;
+        console.log(e.target.value);
+        const { value } = e.target;
         this.setState({
             searchKey: value,
             currentPage: 0,
             sortType: sortEnum.NONE,
             sortKey: '',
         });
-        const { data } = this.state;
-        const { searchKey } = this.props;
+        const { data, columns } = this.state;
         var queryResult = [];
-        value = value ? value.toLowerCase() : "";
-        for (let i = 0; i < data.length; i++) {
-            const searchKeyValue = data[i][searchKey];
-            if ((searchKeyValue && searchKeyValue.toLowerCase().indexOf(value) !== -1) || value === '') {
-                queryResult.push(data[i]);
+        if (data.length > 0) {
+            if (value.trim()) {
+                for (let i = 0; i < data.length; i++) {
+                    let row = data[i];
+                    console.log(row);
+                    for (let j = 0; j < columns.length; j++) {
+                        let colData = columns[j].key;
+                        if (row[colData]) {
+                            if (row[colData].toLowerCase().indexOf(value) !== -1 || row[colData].indexOf(value) !== -1) {
+                                queryResult.push(data[i]);
+                                break;
+                            }
+                        }
+                    }
+                }
+            } else {
+                queryResult = data;
             }
+            this.setState({
+                displayData: queryResult,
+            });
+            this.calculateTotalPages(queryResult);
         }
-        this.setState({
-            displayData: queryResult,
-        });
-        this.calculateTotalPages(queryResult);
     }
 
     displayShowPageLimit() {
@@ -343,7 +356,7 @@ export class Table extends React.Component<any, any> {
 
     render() {
         const { displayData, perPageLimit, currentPage, showSelect } = this.state;
-        let { tableClasses, showingLine } = this.props;
+        let { tableClasses, showingLine, dark } = this.props;
         let startIndex = perPageLimit * currentPage + 1;
         let endIndex = perPageLimit * (currentPage + 1);
         if (endIndex > displayData.length) {
@@ -355,35 +368,31 @@ export class Table extends React.Component<any, any> {
             showingLine = showingLine.replace("%total%", displayData.length);
         }
         return (
-            <div className={`${tableClasses.parentClass} custom-table`}>
-                <div className="row">
-                    <div className="col-sm-12">
-                        <div className="d-inline-block showing">{showingLine}</div>
-                        <div className="d-inline-block showby">
-                            <label className="d-inline-block">Show</label>
-                            <select onChange={this.handleChange} className="form-control">
-                                {this.displayShowPageLimit()}
-                            </select>
-                            <span className="d-inline-block">entries per page</span>
+            <div className={`${tableClasses.parentClass} custom-table ${dark ? 'dark' : ''}`}>
+                <div className="toolbar">
+                    <div className="showing">{showingLine}</div>
+                    <div className="showby">
+                        <label>Show</label>
+                        <select onChange={this.handleChange} className="form-control">
+                            {this.displayShowPageLimit()}
+                        </select>
+                        <span>entries per page</span>
+                    </div>
+                    <div className="multiselect">
+                        <div className="form-control select-label" onClick={this.toggleColumnSelect}>
+                            Select columns <i className="arrow down"></i>
                         </div>
-                        <div className="d-inline-block multiselect">
-                            <div className="form-control select-label" onClick={this.toggleColumnSelect}>
-                                Select columns <i className="fa fa-chevron-down float-right"></i>
-                            </div>
-                            <div style={{ display: showSelect ? "" : "none" }} className="options">
-                                {this.renderColumns()}
-                            </div>
-                        </div>
-                        <div className="d-inline-block float-right form-group filter-search-control">
-                            <input type="text" className="input-group-text" onChange={this.onSearchChange} value={this.state.searchKey} />
-                            <button>
-                                <i className="fa fa-search"></i>
-                            </button>
+                        <div style={{ display: showSelect ? "" : "none" }} className="border options">
+                            {this.renderColumns()}
                         </div>
                     </div>
+                    <div className="filter-search-control">
+                        <input type="text" className="input-group-text" onChange={this.onSearchChange} value={this.state.searchKey} />
+                        <button><span>Search</span></button>
+                    </div>
                 </div>
-                <div className={tableClasses.tableParent}>
-                    <table className={tableClasses.table}>
+                <div className={`${tableClasses.tableParent} data-table-parent`}>
+                    <table className={`${tableClasses.table} data-table`}>
                         <thead>
                             <tr>
                                 {this.tableHeader()}
@@ -395,7 +404,7 @@ export class Table extends React.Component<any, any> {
                         </tbody>
                     </table>
                 </div>
-                <div className="d-block width-100 p-t-15 text-right pagination">
+                <div className="d-block width-100 pt-3 text-right">
                     {this.peginationOfTable()}
                 </div>
             </div>
