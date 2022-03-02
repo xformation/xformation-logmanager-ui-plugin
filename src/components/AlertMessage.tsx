@@ -1,5 +1,4 @@
 import * as React from 'react';
-// import Button from '@material-ui/core/Button';
 import Snackbar from '@material-ui/core/Snackbar';
 import MuiAlert from '@material-ui/lab/Alert';
 import { makeStyles } from '@material-ui/core/styles';
@@ -12,40 +11,38 @@ const useStyles = makeStyles((theme) => ({
   root: {
     width: '300%',
     '& > * + *': {
-      marginTop: theme.spacing(2)
+      marginTop: theme.spacing(2),
     },
   },
-  
 }));
 
 export default function AlertMessage(props: any) {
-    
   const classes = useStyles();
-  const [open, setOpen] = React.useState(false);
   const vertical = 'top';
   const horizontal = 'right';
-
-  const handleClick = () => {
-    setOpen(true);
-  };
 
   const handleClose = (event: any, reason: any) => {
     if (reason === 'clickaway') {
       return;
     }
-    
-    setOpen(false);
+
     if (props.handleCloseAlert) {
-        console.log("calling handle close");
-        props.handleCloseAlert();
-        return;
+      console.log('calling handle close');
+      props.handleCloseAlert();
+      return;
     }
   };
 
   return (
     <div className={classes.root}>
-      <Snackbar style={{top:'87px', left:"auto", right:"24px"}} autoHideDuration={6000} open={props.open}  
-                onClose={handleClose} anchorOrigin={{vertical, horizontal}} key={`${vertical},${horizontal}`}>
+      <Snackbar
+        style={{ top: '87px', left: 'auto', right: '24px' }}
+        autoHideDuration={6000}
+        open={props.open}
+        onClose={handleClose}
+        anchorOrigin={{ vertical, horizontal }}
+        key={`${vertical},${horizontal}`}
+      >
         <Alert onClose={handleClose} severity={props.severity}>
           {props.msg}
         </Alert>

@@ -1,29 +1,36 @@
-const path = require('path');
-const webpack = require('webpack');
-const CopyWebpackPlugin = require('copy-webpack-plugin');
-const CleanWebpackPlugin = require('clean-webpack-plugin');
-const ReplaceInFileWebpackPlugin = require('replace-in-file-webpack-plugin');
+const path = require("path");
+const webpack = require("webpack");
+const CopyWebpackPlugin = require("copy-webpack-plugin");
+const CleanWebpackPlugin = require("clean-webpack-plugin");
+const ReplaceInFileWebpackPlugin = require("replace-in-file-webpack-plugin");
 
-const packageJson = require('./package.json');
+const packageJson = require("./package.json");
 
 module.exports = {
   node: {
-    fs: 'empty'
+    fs: "empty"
   },
-  context: path.join(__dirname, 'src'),
+  context: path.join(__dirname, "src"),
   entry: {
-    'module': './module.ts',
+    module: "./module.ts"
   },
-  devtool: 'source-map',
+  devtool: "source-map",
   output: {
-    filename: '[name].js',
-    path: path.join(__dirname, 'dist'),
-    libraryTarget: 'amd'
+    filename: "[name].js",
+    path: path.join(__dirname, "dist"),
+    libraryTarget: "amd"
   },
   externals: [
-    'lodash', 'moment', 'slate', 'prismjs', 'slate-plain-serializer', 'slate-react', 'react', 'react-dom',
-    function (context, request, callback) {
-      var prefix = 'grafana/';
+    "lodash",
+    "moment",
+    "slate",
+    "prismjs",
+    "slate-plain-serializer",
+    "slate-react",
+    "react",
+    "react-dom",
+    function(context, request, callback) {
+      var prefix = "grafana/";
       if (request.indexOf(prefix) === 0) {
         return callback(null, request.substr(prefix.length));
       }
@@ -31,28 +38,33 @@ module.exports = {
     }
   ],
   plugins: [
-    new CleanWebpackPlugin('dist', { allowExternal: true }),
+    new CleanWebpackPlugin("dist", { allowExternal: true }),
     new webpack.optimize.OccurrenceOrderPlugin(),
     new CopyWebpackPlugin([
-      { from: 'plugin.json', to: '.' },
-      { from: 'partials/*', to: '.' },
-      { from: 'css/*', to: '.' },
-      { from: 'img/*', to: '.' },
+      { from: "plugin.json", to: "." },
+      { from: "partials/*", to: "." },
+      { from: "css/*", to: "." },
+      { from: "img/*", to: "." }
     ]),
-    new ReplaceInFileWebpackPlugin([{
-      dir: 'dist',
-      files: ['plugin.json'],
-      rules: [{
-        search: '%VERSION%',
-        replace: packageJson.version
-      }, {
-        search: '%TODAY%',
-        replace: (new Date()).toISOString().substring(0, 10)
-      }]
-    }]),
+    new ReplaceInFileWebpackPlugin([
+      {
+        dir: "dist",
+        files: ["plugin.json"],
+        rules: [
+          {
+            search: "%VERSION%",
+            replace: packageJson.version
+          },
+          {
+            search: "%TODAY%",
+            replace: new Date().toISOString().substring(0, 10)
+          }
+        ]
+      }
+    ])
   ],
   resolve: {
-    extensions: ['.ts', '.tsx', '.js', '.jsx']
+    extensions: [".ts", ".tsx", ".js", ".jsx"]
   },
   module: {
     rules: [
@@ -60,42 +72,41 @@ module.exports = {
         test: /\.tsx?$/,
         loaders: [
           {
-            loader: 'babel-loader',
-            options: { presets: ['env'] }
+            loader: "babel-loader",
+            options: { presets: ["env"] }
           },
-          'ts-loader'
+          "ts-loader"
         ],
-        exclude: /(node_modules)/,
+        exclude: /(node_modules)/
       },
       {
         test: /\.(graphql|gql)$/,
         exclude: /node_modules/,
-        loader: ['graphql-tag/loader'],
+        loader: ["graphql-tag/loader"]
       },
       {
         test: /\.css$/,
         use: [
           {
-            loader: 'style-loader'
+            loader: "style-loader"
           },
           {
-            loader: 'css-loader',
+            loader: "css-loader",
             options: {
               importLoaders: 1,
               sourceMap: true
             }
-          },
+          }
         ]
       },
       {
         test: /\.(png|jpe?g|gif)$/i,
         use: [
           {
-            loader: 'url-loader',
-          },
-        ],
+            loader: "url-loader"
+          }
+        ]
       }
     ]
   }
-}
-
+};

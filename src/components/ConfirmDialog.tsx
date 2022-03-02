@@ -7,16 +7,8 @@ import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 
 export default function ConfirmDialog(props: any) {
-  const [open, setOpen] = React.useState(false);
   
-//   const handleClick = (userChoice: boolean) => {
-//     console.log("handleClick : userChoice -> "+ userChoice)
-//     setChoice(userChoice);
-//     handleClose;
-//   };
-
   const handleClose = () => {
-    setOpen(false);
     if (props.handleCloseConfirmDialog) {
         console.log("calling handleCloseConfirmDialog");
         props.handleCloseConfirmDialog();
@@ -26,7 +18,6 @@ export default function ConfirmDialog(props: any) {
 
   const onConfirm = () => {
     console.log("onConfirm clicked ")
-    setOpen(false);
     if(props.handleConfirmDelete){
         props.handleConfirmDelete(props.objectType, props.objectId);
         return;
