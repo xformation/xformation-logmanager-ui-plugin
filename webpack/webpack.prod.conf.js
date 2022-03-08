@@ -180,7 +180,8 @@ module.exports = {
           {
             loader: 'file-loader',
             options: {
-              outputPath: '/',
+              publicPath: `public/plugins/${getPluginId()}/img`,
+              outputPath: 'img',
               name: '[path][name].[ext]',
             },
           },
@@ -203,16 +204,16 @@ module.exports = {
         test: /\.css$/,
         use: [
           {
-            loader: "style-loader"
+            loader: 'style-loader',
           },
           {
-            loader: "css-loader",
+            loader: 'css-loader',
             options: {
               importLoaders: 1,
-              sourceMap: true
-            }
-          }
-        ]
+              sourceMap: true,
+            },
+          },
+        ],
       },
     ],
   },
